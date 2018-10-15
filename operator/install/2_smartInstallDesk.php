@@ -770,7 +770,6 @@
 		$("#input-scnpartno-chk").focus();
 		return false;
     }
-	
 	function on_oll_install(){
 		$("#ModalOLL").on("show", function() {    
 			$("#ModalOLL a.btn").on("click", function(e) {
@@ -796,7 +795,6 @@
 		},
 		function(result) { $('#ModalIsi').html(result).show(); });
 	}
-
 	function on_chk_feeder(){
 		$("#ModalFeeder").on("show", function() {    
 			$("#ModalFeeder a.btn").on("click", function(e) {
