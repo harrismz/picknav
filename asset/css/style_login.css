@@ -1,0 +1,174 @@
+/* ---------- GENERAL ---------- */
+body{
+  _background:url(../img/pcb.jpg) no-repeat center center fixed;
+	_-webkit-background-size: cover;
+	_-moz-background-size: cover;
+	_-o-background-size: cover;
+	_background-size: cover;
+
+  background:repeat url(../img/bg.jpg);
+  font: 87.5%/1.5em 'Open Sans', sans-serif;
+  margin: 0;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+}
+input {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5em;
+  padding: 0;
+  -webkit-appearance: none;
+}
+.title{
+  color: #fff;
+  line-height: 1.5em;
+  font-weight: bold;
+}
+.container {
+  padding: 30px 20px 10px;
+  left: 50%;
+  position:absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #FA8F46;
+  _background: #008080;
+  box-shadow: 0 0 5px 2px;
+}
+
+/* ---------- LOGIN ---------- */
+#login { width: 280px; }
+#login form input { height: 50px; line-height: 50px;}
+#login form .itext {
+  color: #01395e;
+  display: block;
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+}
+#login form .itext:before {
+  font-family: 'FontAwesome', sans-serif;
+  padding: 18px 9px 18px;
+  background: #fff;
+}
+#login form input[type="text"], input[type="password"] {
+    background-color: #fff;
+    border-radius: 0px 3px 3px 0px;
+    color: #3b4148;
+    margin-bottom: 1em;
+    padding: 0 10px;
+    width: 230px;
+}
+#login > p { text-align: center; }
+#login > p itext { padding-left: 5px; }
+#login form input[type="submit"] {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    background: -webkit-linear-gradient(left, #FA8F46, #01395e);
+    background: -o-linear-gradient(right, #FA8F46, #01395e);
+    background: -moz-linear-gradient(right, #FA8F46, #01395e);
+    background: linear-gradient(to right, #FA8F46, #01395e);
+    color: #eee;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 280px;
+}
+
+#login form input[type="submit"]:hover {
+  background: -webkit-linear-gradient(left, #01395e, #FA8F46);
+  background: -o-linear-gradient(right, #01395e, #FA8F46);
+  background: -moz-linear-gradient(right, #01395e, #FA8F46);
+  background: linear-gradient(to right, #01395e, #FA8F46);
+}
+/************************************************/
+#login form .chkrpl{
+  text-decoration: none;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  font-weight: bold;
+  float:left;
+  margin:1px;
+}
+#login form .itext-check {
+  display: block;
+  float: left;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+#login form .itext-replace {
+  display: block;
+  float: right;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+#login form .itext-check:before  {
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  font-family: 'FontAwesome', sans-serif;
+  padding: 13px 9px 13px;
+  color: #fff;
+  background: #34A853;
+}
+#login form .itext-replace:before  {
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  font-family: 'FontAwesome', sans-serif;
+  padding: 13px 9px 13px;
+  color: #fff;
+  background: #dd2c00;
+}
+#login form #btnchk{
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  _background: -webkit-linear-gradient(left, #34A853, #dd2c00);
+  background: -webkit-linear-gradient(left, #34A853, #FDDBC4);
+  background: -o-linear-gradient(right, #34A853, #FDDBC4);
+  background: -moz-linear-gradient(right, #34A853, #FDDBC4);
+  background: linear-gradient(to right, #34A853, #FDDBC4);
+}
+#login form #btnchk:hover{
+  background: -webkit-linear-gradient(left, #FDDBC4, #dd2c00);
+  background: -o-linear-gradient(right, #FDDBC4, #dd2c00);
+  background: -moz-linear-gradient(right, #FDDBC4, #dd2c00);
+  background: linear-gradient(to right, #FDDBC4, #dd2c00);
+}
+/**********************************/
+.err{
+    line-height: 1.2em;
+    text-align: center;
+    color: yellow;
+}
+/* DIAGONAL SHADOW */
+.container:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 150px solid #01395e;
+    border-left: 130px solid rgba(0, 0, 0, 0);
+    width: 0;
+    z-index: -1;
+}
+.container:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-bottom: 150px solid #01395e;
+    border-right: 130px solid rgba(0, 0, 0, 0);
+    width: 0;
+    z-index: -1;
+}

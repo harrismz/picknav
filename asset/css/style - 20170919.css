@@ -1,0 +1,3057 @@
+/*
+	#596e89;
+    #01395e; navy
+    #FA8F46; orange
+	#a2a78b; background
+	#AF754D;
+	#008080; hijau
+*/
+
+
+@font-face{
+	font-family: 'Captureit';
+	src: url(../../../font/Capture_it.ttf);
+}
+@font-face{
+	font-family: 'RobotoCondensed';
+	src: url(../font/RobotoCondensed-Regular.ttf);
+}
+*{outline: 0px !important;}
+html,body{
+	background:repeat url(../img/bg.jpg);
+	height: 100%;
+	margin:0;
+	padding: 0;
+}
+section{ top:0; }
+/*--------------------------------------------------------------------------------------------- NOT LOGIN YET ----------------------*/
+#httperror{
+	position: fixed;
+	background-image: url(../img/iron_texture.jpg);
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	color: #ffcc00;
+}
+#httperror>#httpcode, #httperror>#httpcode2, #httperror>#errorcontent{
+	font-family: 'Captureit';
+	text-shadow: 5px 5px rgba(0,0,0,1);
+	box-shadow: 5px 5px 5px rgba(0,0,0,1);
+}
+#httperror>#httpcode{ font-size: 60px; }
+#httperror>h4>a, #httperror>h4>a:hover, #httperror>h4>a:active { text-decoration: none; color: #ffcc00; }
+/*------------------------------------------------------------------------------------------------------------- MAIN PAGE ----------*/
+.modalstyle-header, .modalstyle-footer{
+	color: #fff;
+}
+.modalstyle-close{
+	position:relative;
+	top:-2px;
+	color:inherit;
+	float:right;
+	font-size:21px;
+	font-weight:700;
+	line-height:1;
+	color:#fff;
+	text-shadow:0 1px 0 red;
+	filter:alpha(opacity=20);
+	opacity:1;
+	background-color: red;
+	border: 0px;
+	border-radius: 1px;
+	padding: 5px;
+}
+.modalstyle-close:focus,.modalstyle-close:hover{
+	color:#fff;
+	text-decoration:none;
+	cursor:pointer;
+	filter:alpha(opacity=70);
+	opacity:.7
+}
+.modalstyle-button{
+	background-color: #008080;
+	color: #fff;
+	border-radius: 0px;
+}
+.modalstyle-button:hover{
+	background-color: #FA8F46;
+	color: #fff;
+}
+.modalstyle-body{
+	background-color: #f3f4f0;
+}
+.modalstyle-title{
+	background-color: #01395e;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	line-height: 1.5em;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+/*------------------------------------------------------------------------------------- src menu -----------------*/
+.panel-picknav, .panel-picknav-chkrpl{
+	box-shadow: 0px 0px 5px #aaa;
+	border-radius: 0;
+	padding: 10px !important;
+	font-size: 17px;
+}
+.search-button, .search-button:focus,
+.search-button-2, .search-button-2:hover, .search-button-2:focus,
+.search-button-1, .search-button-1:focus, .search-button-3:focus,.search-button-3{
+	background-color: #4c8ab9;
+	color: #fff;
+	border: none;
+}
+.search-button-1:hover, .search-button-3:hover,.search-button:hover{
+	background-color: #00b0ff;
+	color: #fff;
+	border: none;
+}
+
+/*------------------------------------------------------------------------------------- table -----------------*/
+#tbl_joblist, #tbl_loadlist, #tbl_smpdesk, #tbl_installdesk, #tbl_checkeddesk,
+#tbl_installdata,#tbl_checked,#tbl_scanpartno,#tbl_scanpartno_chkd{
+	box-shadow: 0px 0px 50px #aaa;
+	border-radius: 0;
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	font-size: 17px;
+}
+#tbl_chkfull{
+	_box-shadow: 0px 0px 50px #aaa;
+	_border-radius: 0;
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	font-size: 17px;
+}
+#hasilJobno{
+	box-shadow: 0px 0px 50px #aaa;
+	border-radius: 0;
+	padding: 10px;
+	margin-top: 15px;
+	margin-bottom: 115px;
+}
+/*------------------------------------------------------------------------------------- MOBILE SMART PICKING -----------------*/
+.chk_loose_reel_rl, .chk_loose_reel_qty, .chk_full_reel_rl, .chk_full_reel_qty{
+	width: 90%;
+	display: none;
+}
+/*-----SCAN PARTNUMBER------*/
+#label-scnpartno-chk, #input-scnpartno-chk{
+	margin-top: 10px;
+	font-size: 25px;
+	position:relative;
+	left: 5%;
+	text-align: center;
+}
+#scan_partnumber{
+	box-shadow: 0px 0px 50px #aaa;
+	border-radius: 0;
+	width: calc(100% - 60px) !important;
+	margin-left: 50px;
+	padding: 0px;
+}
+#label-scnpartno{
+	font-size: 50px;
+	text-align: center;
+	margin-top: 30px;
+}
+#input-scnpartno-chk{ width: 60%; }
+#dt_scanInstall thead th,#dt_scanInstall tbody td, #dt_scanChecked thead th,#dt_scanChecked tbody td {
+	text-align:center;
+}
+#dt_scanInstall thead th,#dt_scanChecked thead th{
+	text-align:center;
+	color: #008080;
+	font-size: 30px;
+}
+#dt_scanInstall tbody td,#dt_scanChecked tbody td{
+	border: solid #fff 3px;
+	vertical-align: middle;
+	text-align:center;
+	color: #fff;
+	font-size: 70px;
+	height: 100px;
+}
+/*--------------------------*/
+
+.main > #mtc{
+	height: 350px;
+	width: 800px;
+	position: fixed; /* or absolute */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.modal-body {
+    position: relative;
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 15px;
+}
+
+@media only screen and (min-width: 963px){ 		/*------------- MINIMUM 963PX VIEW -------*/
+
+/*@media only screen and (min-width: 1081px){ 	/*------------- MINIMUM 1200PX VIEW -------*/
+	/*----------------------------------------------------- 1200 NAVIGATION -----------*/
+	.nav-side-menu {
+        background-color: #01395e; /*background menu*/
+        font-family: 'Open Sans', Arial, sans-serif;
+        height: 100%;
+        width: 220px;
+        position: fixed;
+        font-size: 18px;
+        font-weight: 400;
+        top: 0px;
+        box-shadow: 3px 0px 5px 0px;
+        z-index: 1030;
+        margin-left: -186px;
+    }
+    .nav-side-menu:hover {
+        margin-left: 0px;
+    }
+    #brand{
+        width: 220px;
+        text-align: center;
+        padding: 2px;
+    }
+    .nav-side-menu > .toggle-btn{ display: none !important; }
+    .menu-list{
+        background-color: #01395e;
+        width: 220px;
+    }
+    .menu-list>.menu-content{
+        padding:0px;
+        display: block;
+    }
+    .menu-list>.menu-content>li{
+        line-height: 3em;
+		border-bottom: 1px solid #fff;
+    }
+    .menu-list>.menu-content>li>a{
+        color: #fff;
+        position: fixed;
+        width: 220px;
+        text-decoration: none;
+    }
+    .menu-list>.menu-content>li>a:hover{
+        font-weight: bold;
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    /*--- menu color category ---*/
+	.menu-list>.menu-content>#userMenu>a:hover, .menu-list>.menu-content>#helpMenu>a:hover
+	{ background-color: #fff; color: #000; border-left: 5px solid #fff; border-right: 4px solid #fff; }
+    .menu-list>.menu-content>#partnoMenu>a:hover{ background-color: #004d33; border-left: 5px solid #004d33; border-right: 4px solid #004d33; }
+    .menu-list>.menu-content>#pickingMenu>a:hover{ background-color: #00b0ff; border-left: 5px solid #00b0ff; border-right: 4px solid #00b0ff; }
+    .menu-list>.menu-content>#installMenu>a:hover{ background-color: #ff9800; border-left: 5px solid #ff9800; border-right: 4px solid #ff9800; }
+    .menu-list>.menu-content>#checkedMenu>a:hover{ background-color: #34A853; border-left: 5px solid #34A853; border-right: 4px solid #34A853; }
+    .menu-list>.menu-content>#replaceMenu>a:hover{ background-color: #dd2c00; border-left: 5px solid #dd2c00; border-right: 4px solid #dd2c00; }
+    .menu-list>.menu-content>#limitMenu>a:hover, .menu-list>.menu-content>#logoutMenu>a:hover
+	{ background-color: #EA4335; border-left: 5px solid #EA4335; border-right: 4px solid #EA4335; }
+	
+	/*-----checked and replace navigation -----*/
+	.menu-list>.menu-content>#chkpartMenu>a:hover{ background-color: #8BC34A; border-left: 5px solid #8BC34A; border-right: 4px solid #8BC34A; }
+    .menu-list>.menu-content>#rplfeederMenu>a:hover{ background-color: #AA00FF; border-left: 5px solid #AA00FF; border-right: 4px solid #AA00FF; }
+    
+    /*-----------------------------------clicked--------------------------*/
+		.partnoClick{ background-color: #004d33;}
+		.partnoClick-table thead,.partnoClick-table tbody{
+			border-left: 1px solid #004d33;
+			border-right: 1px solid #004d33;
+		}
+		.partnoClick-table thead{ background-color: #004d33; color:#fff; }
+		.partnoClick-table tbody{ border-bottom: 2px solid #004d33; }
+		/*- ---- -*/
+		.pickingClick{ background-color: #00b0ff;}
+		.pickingClick-table thead,.pickingClick-table tbody{
+			border-left: 1px solid #00b0ff;
+			border-right: 1px solid #00b0ff;
+		}
+		.pickingClick-table thead{ background-color: #00b0ff; color:#fff; }
+		.pickingClick-table tbody{ border-bottom: 2px solid #00b0ff; }
+		/*- ---- -*/
+		.installClick{ background-color: #ff9800;}
+		.installClick-table thead,.installClick-table tbody{
+			border-left: 1px solid #ff9800;
+			border-right: 1px solid #ff9800;
+		}
+		.installClick-table thead{ background-color: #ff9800; color:#fff; }
+		.installClick-table tbody{ border-bottom: 2px solid #ff9800; }
+		/*- ---- -*/
+		.checkedClick{ background-color: #34A853;}
+		.checkedClick-table thead,.checkedClick-table tbody{
+			border-left: 1px solid #34A853;
+			border-right: 1px solid #34A853;
+		}
+		.checkedClick-table thead{ background-color: #34A853; color:#fff; }
+		.checkedClick-table tbody{ border-bottom: 2px solid #34A853; }
+		/*- ---- -*/
+		.replaceClick{ background-color: #dd2c00;}
+		.replaceClick-table thead,.replaceClick-table tbody{
+			border-left: 1px solid #dd2c00;
+			border-right: 1px solid #dd2c00;
+		}
+		.replaceClick-table thead{ background-color: #dd2c00; color:#fff; }
+		.replaceClick-table tbody{ border-bottom: 2px solid #dd2c00; }
+		/*- ---- -*/
+		.limitClick { background-color: #EA4335;}
+		.limitClick-table thead,.limitClick-table tbody{
+			border-left: 1px solid #EA4335;
+			border-right: 1px solid #EA4335;
+		}
+		.limitClick-table thead{ background-color: #EA4335; color:#fff; }
+		.limitClick-table tbody{ border-bottom: 2px solid #EA4335; }
+		
+	/*- chkrpl navigation-----*/
+	
+		.chkpartClick{ background-color: #8BC34A;}
+		.chkpartClick-table thead,.chkpartClick-table tbody{
+			border-left: 1px solid #8BC34A;
+			border-right: 1px solid #8BC34A;
+		}
+		.chkpartClick-table thead{ background-color: #8BC34A; color:#fff; }
+		.chkpartClick-table tbody{ border-bottom: 2px solid #8BC34A; }
+		
+		/*- ---- -*/
+		.rplfeederClick{ background-color: #AA00FF;}
+		.rplfeederClick-table thead,.rplfeederClick-table tbody{
+			border-left: 1px solid #AA00FF;
+			border-right: 1px solid #AA00FF;
+		}
+		.rplfeederClick-table thead{ background-color: #AA00FF; color:#fff; }
+		.rplfeederClick-table tbody{ border-bottom: 2px solid #AA00FF; }
+		/*- ---- -*/
+		
+
+
+    /*--- end menu color category ---*/
+
+    .menu-list>.menu-content>li>a>i{
+		padding-top: 18px;
+		padding-right: 5px;
+	}
+
+	.fixedtitle{
+		position: fixed;
+		top: 0;
+		z-index: 1;
+		width: 100%;
+	}
+	#titleDash{
+		color: #fff;
+		font-weight: bold;
+		text-align: center;
+		font-size: 30px;
+		font-family: "Captureit";
+		height: 40px;
+	}
+	#titleDashHome{
+		background-color: #01395e;
+		color: #fff;
+		font-weight: bold;
+		text-align: center;
+		font-size: 20px;
+		font-family: "Captureit";
+		height: 30px;
+	}
+	.footer{
+		background-color: #01395e;
+		color: #fff;
+		font-weight: bold;
+		text-align: center;
+		font-size: 12px;
+		height: 18px;
+		position: fixed;
+		bottom: 0;
+		z-index: 1;
+		width: 100%;
+	}
+	.btn-title{
+		background-color: #01395e;
+		border-radius: 0px;
+		height: 40px;
+		color: #fff !important;
+		font-family: 'Open Sans', Arial, sans-serif;
+		top: -5px;
+	}
+	.btn-title:hover, .btn-title:target{
+		background-color: #008080;
+		border-radius: 0px;
+		height: 40px;
+		color: #fff;
+		font-weight: bold;
+		font-family: 'Open Sans', Arial, sans-serif;
+	}
+	/*------------------------------------------------------------- > 1200 SEARCH DATA ----------*/
+	td>input[type="radio"]{ display: none; }
+    td>.rb{
+        display: inline-block;
+        text-align: center;
+        background-color: #a0b3d4;
+        color: #fff;
+        width: 49%;
+        padding: 5px 0px;
+        font-size:17px;
+        margin: 0px;
+    }
+    td>input[type="radio"]:checked + label { background-color:#008080; }
+    .poscenter{text-align:center;}
+	
+	/*------------------------------------------------------------------------- > 1200 desktop search ---*/
+	#content{
+		top: 80px;
+		position: relative;
+	}
+	.panel-picknav, #tbl_joblist, #tbl_loadlist, #tbl_smpdesk, #tbl_installdesk, #tbl_checkeddesk,
+	#tbl_installdata,#tbl_checked,#tbl_scanpartno,#tbl_scanpartno_chkd{
+        width: calc(100% - 60px) !important;
+        margin-left: 50px;
+		padding: 0px;
+    }
+	.panel-picknav-chkrpl, #hasilJobno{
+		_border : solid 2px orange;
+        width: calc(60%) !important;
+        margin-left: 20%;
+		padding: 0px;
+    }
+	.panel-kiri{
+		_border : solid 2px orange;
+        width: calc(35%);
+        margin-left: 3%;
+		
+		position:relative;
+		min-height:1px;
+		float:left;
+    }
+	.panel-kanan{
+		_border : solid 2px orange;
+        width: 60%;
+        margin: 10px 0px 0px 10px;
+		padding: 0px 15px 0px 15px;
+		position:relative;
+		min-height:1px;
+		float:left;
+    }
+	.subpanel-atas, .subpanel-bawah{
+		width: 100%;
+		box-shadow: 0px 0px 5px #aaa;
+		/*atas kanan bawah kiri*/
+		padding: 10px 15px 10px 5px;
+		margin: 10px 0px 0px 0px;
+		font-size: 17px;
+		position:relative;
+		min-height:1px;
+		float:left;
+	}
+	.subpanel-bawah{
+		text-align: center;
+	}
+	#chkfull-status{
+		
+	}
+	.search-label{
+        width: 12%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .search-input{
+        width: 21%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .chkfull-label{
+        width: 42%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .chkfull-input{
+        width: 57%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .search-button{
+        width: 32%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+    .search-label-2{
+        width: 10%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .search-input-2{
+        width: 39.7%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .search-button-2{
+        width: 49.1%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+	.search-button-3{
+        width: 97%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+	.search-button-1{
+        width: 99%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+	/* CHKRPL */
+	#content-chkrpl{
+		 top: 40px;
+		 position: relative;
+	 }
+	 
+	.label-chkfull{
+        width: 29.5%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .input-chkfull{
+        width: 69.5%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+	/*----------------*/
+    /* CHKJOBNO      */
+    /*--------------*/
+    #chkJobno tbody td:nth-child(1){
+		width:20%;
+		text-align:right;
+		_background-color: #34A853;
+		background-color: #0289e3;
+		color: #fff;
+		font-size: 12px;
+	}
+    #chkJobno tbody td:nth-child(2) { 
+		width:80%; 
+		text-align:left;
+		font-size: 12px;
+	}
+    .chkJobno-info{
+		text-align:center;
+		padding: 10px;
+	}
+	.modalstyle-button-chkrpl{
+		background-color: #fff;
+		color: #000;
+		border-radius: 0px;
+		width: 50%;
+	}
+	.modalstyle-button-chkrpl:hover{
+		background-color: #1de9b6;
+		color: #000;
+		width: 50%;
+	}
+	.jmlScan{
+		font-size: 35px;
+		text-align: center;
+		font-family: 'RobotoCondensed';
+		src: url(../font/RobotoCondensed-Regular.ttf);
+	}
+	.titleScan{
+		font-size: 30px;
+		text-align: center;
+		font-family: 'RobotoCondensed';
+		src: url(../font/RobotoCondensed-Regular.ttf);
+	}
+	.belum{
+		color: red;
+	}
+	.sudah{
+		color: blue;
+	}
+	/* end CHKRPL */
+	
+	
+   /*--------------------------------------------------------------------- JOBLIST TABLE ---------------*/
+	.btn-detail, .btn-pass, .btn-unfinish{
+        display: inline-block;
+        _margin-bottom: 3px;
+        _margin-top: 3px;
+        _font-size: 14px;
+        font-size: 16px;
+        _font-weight: normal;
+        _line-height: 2;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+        background-image: none;
+        _border-radius: 4px;
+        border-radius: 0;
+        border: 0 none;
+        _font-weight: 700;
+        _letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+	.btn-detail{color: #fff; background: #0099cc;}
+	.btn-pass{color: #fff; background: green;}
+	.btn-unfinish{color: #fff; background: red;}
+
+    .btn-detail:hover, .btn-detail:focus, .btn-detail:active, .btn-detail.active {
+        color: #fff;
+        background: #FA8F46;
+    }
+    .btn-unfinish:hover, .btn-unfinish:focus, .btn-unfinish:active, .btn-unfinish.active {
+        color: #fff;
+        background: #ff4d4d;
+    }
+    .btn-detail:focus, .btn-detail:active:focus, .btn-detail.active:focus,
+    .btn-pass:focus, .btn-pass:active:focus, .btn-pass.active:focus { outline: 0 none; }
+    .btn-pass:hover, .btn-pass:focus, .btn-pass:active, .btn-pass.active {
+        color: #000;
+        background: lightgreen;
+    }
+    tbody>tr[#dt_joblist]:hover, tbody>tr[#dt_smpdesk]:hover,
+	tbody>tr[#dt_installdesk]:hover, tbody>tr[#dt_detailSP]:hover,
+	tbody>tr[#dt_checkeddesk]:hover{ background: #FA8F46; }
+	tbody>tr[#tbl-chk]:hover{ background: lightblue; }
+	
+    #dt_joblist thead, #dt_loadlist thead,#dt_smpdesk thead,
+	#dt_installdesk thead, #dt_detailSP thead, #dt_installdata thead,
+	#dt_checkeddesk thead, #dt_checked thead{
+        display: block;
+    }
+
+	#dt_joblist tbody,#dt_loadlist tbody,#dt_smpdesk tbody,
+	#dt_installdesk tbody, #dt_detailSP tbody, #dt_installdata tbody,
+	#dt_checkeddesk tbody, #dt_checked tbody{
+        display: block;
+        overflow-y: scroll;
+        position: static;
+    }
+
+	#dt_joblist tbody,#dt_loadlist tbody,#dt_smpdesk tbody,
+	#dt_installdesk tbody, #dt_detailSP tbody { max-height: 600px; }
+	#dt_checkeddesk tbody  { max-height: 350px; }
+
+	#dt_installdata tbody, #dt_checked tbody{  max-height: 550px; }
+	#dt_joblist thead th, #dt_loadlist thead th, #dt_smpdesk thead th,
+	#dt_installdesk thead th, #dt_detailSP thead th, #dt_installdata thead th,
+	#dt_checkeddesk thead th, #dt_checked thead th{
+        vertical-align: top;
+        padding: 8px 8px;
+        text-align: center;
+        text-transform: uppercase;
+		font-size: 15px;
+		color: #fff;
+    }
+    #dt_joblist tbody td, #dt_loadlist tbody td,  #dt_smpdesk tbody td,
+	#dt_installdesk tbody td, #dt_installdata tbody td,
+	#dt_checkeddesk tbody td,#dt_checked tbody td{
+        vertical-align: middle;
+        padding:4px 4px;
+        white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+        white-space: -webkit-pre-wrap; /*Chrome & Safari  */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space: pre-wrap;       /* css-3 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+        white-space: normal;
+        cursor: pointer;
+		height: 50px;
+    }
+	#dt_joblist tbody td, #dt_loadlist tbody td,  #dt_smpdesk tbody td,
+	#dt_installdesk tbody td, #dt_installdata tbody td,
+	#dt_checkeddesk tbody td,#dt_checked tbody td{
+        font-size: 15px;
+    }
+	/*#dt_install tbody td{
+		font-size: 12px;
+	}*/
+
+	#dt_joblist tbody tr:hover, #dt_loadlist tbody tr:hover, #dt_smpdesk tbody tr:hover,
+	#dt_installdesk tbody tr:hover, #dt_detailSP tbody tr:hover, #dt_installdata tbody tr:hover,
+	#dt_checkeddesk tbody tr:hover,#dt_checked tbody tr:hover{
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        color: #01395e;
+        font-weight: bold;
+    }
+	#dt_joblist thead th + th, #dt_loadlist thead th + th,#dt_smpdesk thead th + th,
+	#dt_installdesk thead th + th, #dt_detailSP thead th + th,#dt_installdata thead th,
+	#dt_checkeddesk thead th + th,#dt_checked thead th{
+		border-left:1px solid #fff; /*#AF754D*/
+	}
+	#dt_installdata thead th{ border-bottom:1px solid #fff; /*#AF754D*/ }
+    #dt_joblist tbody td + td, #dt_smpdesk tbody td + td, #dt_detailSP tbody td + td, #dt_loadlist tbody  td + td ,
+	#dt_installdesk tbody td + td, #dt_installdata tbody td,
+	#dt_checkeddesk tbody td + td,#dt_checked tbody td{
+		border-left:1px solid #01395e; /*#AF754D*/
+	}
+	/*#dt_install tbody  td + td , */
+	/*#dt_install tbody tr + tr{
+		border-top: 1px solid rgba(125,125,125,0.5);
+		border-bottom: 1px solid rgba(125,125,125,0.5);
+	}*/
+    .dt_zfeed thead{
+		background-color: #01395e;
+		color: #fff;
+	}
+	.dt_zfeed thead th{
+		border-left: solid 1px #fff;
+	}
+	.dt_zfeed tbody td{
+		border-left: solid 1px #01395e;
+	}
+	#dt_detaillist tbody td{
+		border: solid 1px #01395e;
+	}
+	.dt_zfeed, #dt_detaillist{
+		border: solid 1px #01395e;
+	}
+	/*-------------------------------------------------*/
+	.dt_zfeed thead th:nth-child(1), .dt_zfeed tbody td:nth-child(1){ width:3px; }
+    .dt_zfeed tbody td:nth-child(1){ text-align:center; }
+	.dt_zfeed thead th:nth-child(2), .dt_zfeed tbody td:nth-child(2){ width:5px; }
+    .dt_zfeed tbody td:nth-child(2){ text-align:center; }
+	/*-------------------------------------------------*/
+	#dt_detaillist tbody td:nth-child(1),#dt_detaillist tbody td:nth-child(3){
+		text-align:center;
+		background-color: #a2a78b;
+		color: #fff;
+		border-bottom: 1px solid #fff;
+		text-align: right;
+		width: 150px;
+	}
+	/*-------------------------------------------------*/
+	/*----------------*/
+    /* JOBLIST TABLE */
+    /*--------------*/
+    /*NO*/
+    #dt_joblist thead th:nth-child(1), #dt_joblist tbody td:nth-child(1){ min-width:50px; }
+    #dt_joblist tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*/
+    #dt_joblist thead th:nth-child(2), #dt_joblist tbody td:nth-child(2) { min-width:150px; }
+    #dt_joblist tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*/
+    #dt_joblist thead th:nth-child(3), #dt_joblist tbody td:nth-child(3) { min-width:320px; }
+    #dt_joblist tbody td:nth-child(3){ text-align:center; }
+    /*DATE*/
+    #dt_joblist thead th:nth-child(4), #dt_joblist tbody td:nth-child(4) { min-width:100px; }
+    #dt_joblist tbody td:nth-child(4){ text-align:center; }
+    /*LINE*/
+    #dt_joblist thead th:nth-child(5), #dt_joblist tbody td:nth-child(5) { min-width:60px; }
+    #dt_joblist tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*/
+    #dt_joblist thead th:nth-child(6), #dt_joblist tbody td:nth-child(6) { min-width:150px; }
+    #dt_joblist tbody td:nth-child(6){ text-align:right; }
+    /*PWBNAME*/
+    #dt_joblist thead th:nth-child(7), #dt_joblist tbody td:nth-child(7){ min-width:180px; }
+    #dt_joblist tbody td:nth-child(7){ text-align:left; }
+    /*PWBNO*/
+    #dt_joblist thead th:nth-child(8), #dt_joblist tbody td:nth-child(8){ min-width:120px; }
+    #dt_joblist tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*/
+    #dt_joblist thead th:nth-child(9), #dt_joblist td:nth-child(9){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*/
+    #dt_joblist thead th:nth-child(10), #dt_joblist tbody td:nth-child(10){ min-width:150px; }
+    #dt_joblist tbody td:nth-child(10){ text-align:right; }
+    /*LOTSIZE*/
+    #dt_joblist thead th:nth-child(11), #dt_joblist tbody td:nth-child(11){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(11){ text-align:left; }
+    /*PIC*/
+    #dt_joblist thead th:nth-child(12), #dt_joblist tbody td:nth-child(12){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(12){ text-align:left; }
+    /*OP*/
+    #dt_joblist thead th:nth-child(13), #dt_joblist tbody td:nth-child(13){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(13){ text-align:left; }
+    /*STDATE*/
+    #dt_joblist thead th:nth-child(14), #dt_joblist tbody td:nth-child(14){ min-width:130px; }
+    #dt_joblist tbody td:nth-child(14){ text-align:center; }
+    /*ENDATE*/
+    #dt_joblist thead th:nth-child(15), #dt_joblist tbody td:nth-child(15){ min-width:130px; }
+    #dt_joblist tbody td:nth-child(15){ text-align:center; }
+
+	/*------------------------*/
+    /* INSTALL TABLE OPERATOR*/
+    /*----------------------*/
+    /*NO*/
+    #dt_installdata thead th:nth-child(1), #dt_installdata tbody td:nth-child(1){ min-width:50px; }
+    #dt_installdata tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*/
+    #dt_installdata thead th:nth-child(2), #dt_installdata tbody td:nth-child(2) { min-width:100px; }
+    #dt_installdata tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*/
+    #dt_installdata thead th:nth-child(3), #dt_installdata tbody td:nth-child(3) { min-width:320px; }
+    #dt_installdata tbody td:nth-child(3){ text-align:center; }
+    /*DATE*/
+    #dt_installdata thead th:nth-child(4), #dt_installdata tbody td:nth-child(4) { min-width:150px; }
+    #dt_installdata tbody td:nth-child(4){ text-align:center; }
+    /*LINE*/
+    #dt_installdata thead th:nth-child(5), #dt_installdata tbody td:nth-child(5) { min-width:80px; }
+    #dt_installdata tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*/
+    #dt_installdata thead th:nth-child(6), #dt_installdata tbody td:nth-child(6) { min-width:150px; }
+    #dt_installdata tbody td:nth-child(6){ text-align:right; }
+    /*PWBNAME*/
+    #dt_installdata thead th:nth-child(7), #dt_installdata tbody td:nth-child(7){ min-width:150px; }
+    #dt_installdata tbody td:nth-child(7){ text-align:left; }
+    /*PWBNO*/
+    #dt_installdata thead th:nth-child(8), #dt_installdata tbody td:nth-child(8){ min-width:120px; }
+    #dt_installdata tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*/
+    #dt_installdata thead th:nth-child(9), #dt_installdata td:nth-child(9){ min-width:100px; }
+    #dt_installdata tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*/
+    #dt_installdata thead th:nth-child(10), #dt_installdata tbody td:nth-child(10){ min-width:123px; }
+    #dt_installdata tbody td:nth-child(10){ text-align:center; }
+    /*LOTSIZE*/
+    #dt_installdata thead th:nth-child(11), #dt_installdata tbody td:nth-child(11){ min-width:100px; }
+    #dt_installdata tbody td:nth-child(11){ text-align:center; }
+    /*PIC*/
+    #dt_installdata thead th:nth-child(12){ min-width:360px; }
+    #dt_installdata thead .th2-1, #dt_installdata thead .th2-2,
+	#dt_installdata thead .th2-3 { min-width:120px !important; }
+    #dt_installdata tbody td:nth-child(12){ min-width:120px; text-align:center;}
+    #dt_installdata tbody td:nth-child(13){ min-width:120px; text-align:center;}
+    #dt_installdata tbody td:nth-child(14){ min-width:120px; text-align:center;}
+
+	/*---------------------*/
+    /* LOADING LIST TABLE */
+    /*-------------------*/
+    /*NO*/
+    #dt_loadlist thead th:nth-child(1), #dt_loadlist tbody td:nth-child(1){ min-width:40px; }
+    #dt_loadlist tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*/
+    #dt_loadlist thead th:nth-child(2), #dt_loadlist tbody td:nth-child(2) { min-width:90px; }
+    #dt_loadlist tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*/
+    #dt_loadlist thead th:nth-child(3), #dt_loadlist tbody td:nth-child(3) { min-width:330px; }
+    #dt_loadlist tbody td:nth-child(3){ text-align:center; }
+    /*DATE*/
+    #dt_loadlist thead th:nth-child(4), #dt_loadlist tbody td:nth-child(4) { min-width:135px; }
+    #dt_loadlist tbody td:nth-child(4){ text-align:center; }
+    /*LINE*/
+    #dt_loadlist thead th:nth-child(5), #dt_loadlist tbody td:nth-child(5) { min-width:80px; }
+    #dt_loadlist tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*/
+    #dt_loadlist thead th:nth-child(6), #dt_loadlist tbody td:nth-child(6) { min-width:180px; }
+    #dt_loadlist tbody td:nth-child(6){ text-align:left; }
+    /*PWBNAME*/
+    #dt_loadlist thead th:nth-child(7), #dt_loadlist tbody td:nth-child(7){ min-width:150px; }
+    #dt_loadlist tbody td:nth-child(7){ text-align:center; }
+    /*PWBNO*/
+    #dt_loadlist thead th:nth-child(8), #dt_loadlist tbody td:nth-child(8){ min-width:150px; }
+    #dt_loadlist tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*/
+    #dt_loadlist thead th:nth-child(9), #dt_loadlist tbody td:nth-child(9){ min-width:90px; }
+    #dt_loadlist tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*/
+    #dt_loadlist thead th:nth-child(10), #dt_loadlist tbody td:nth-child(10){ min-width:130px; }
+    #dt_loadlist tbody td:nth-child(10){ text-align:center; }
+    /*LOTSIZE*/
+    #dt_loadlist thead th:nth-child(11), #dt_loadlist tbody td:nth-child(11){ min-width:90px; }
+    #dt_loadlist tbody td:nth-child(11){ text-align:center; }
+    /*PIC*/
+    #dt_loadlist thead th:nth-child(12), #dt_loadlist tbody td:nth-child(12){ min-width:100px; }
+    #dt_loadlist tbody td:nth-child(12){ text-align:right; }
+    /*OP*/
+    #dt_loadlist thead th:nth-child(13){ width:100px; text-align:center; }
+    #dt_loadlist tbody td:nth-child(13){ width:100px; text-align:center; }
+    /*---------------------*/
+    /* INSTALL ADMIN TABLE */
+    /*-------------------*/
+    /*NO*
+    #dt_install thead th:nth-child(1), #dt_install tbody td:nth-child(1){ min-width:40px; }
+    #dt_install tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*
+    #dt_install thead th:nth-child(2), #dt_install tbody td:nth-child(2) { min-width:100px; border:solid blue 1px}
+    #dt_install tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*
+    #dt_install thead th:nth-child(3), #dt_install tbody td:nth-child(3) { min-width:330px; }
+    #dt_install tbody td:nth-child(3){ text-align:center; }
+    /*DATE*
+    #dt_install thead th:nth-child(4), #dt_install tbody td:nth-child(4) { min-width:135px; }
+    #dt_install tbody td:nth-child(4){ text-align:center; }
+    /*LINE*
+    #dt_install thead th:nth-child(5), #dt_install tbody td:nth-child(5) { min-width:80px; }
+    #dt_install tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*
+    #dt_install thead th:nth-child(6), #dt_install tbody td:nth-child(6) { min-width:180px; }
+    #dt_install tbody td:nth-child(6){ text-align:left; }
+    /*PWBNAME*
+    #dt_install thead th:nth-child(7), #dt_install tbody td:nth-child(7){ min-width:150px; }
+    #dt_install tbody td:nth-child(7){ text-align:center; }
+    /*PWBNO*
+    #dt_install thead th:nth-child(8), #dt_install tbody td:nth-child(8){ min-width:150px; }
+    #dt_install tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*
+    #dt_install thead th:nth-child(9), #dt_install tbody td:nth-child(9){ min-width:90px; }
+    #dt_install tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*
+    #dt_install thead th:nth-child(10), #dt_install tbody td:nth-child(10){ min-width:130px; }
+    #dt_install tbody td:nth-child(10){ text-align:center; }
+    /*LOTSIZE*
+    #dt_install thead th:nth-child(11), #dt_install tbody td:nth-child(11){ min-width:90px; }
+    #dt_install tbody td:nth-child(11){ text-align:center; }
+    /*PIC*
+    #dt_install thead th:nth-child(12), #dt_install tbody td:nth-child(12){ min-width:100px; }
+    #dt_install tbody td:nth-child(12){ text-align:right; }
+    /*OP*
+    #dt_install thead th:nth-child(13){ width:100px; text-align:center; }
+    #dt_install tbody td:nth-child(13){ width:100px; text-align:center; }
+
+	/*--------------------------*/
+    /* CHECKED TABLE OPERATOR */
+    /*------------------------*/
+    /*NO*/
+    #dt_checked thead th:nth-child(1), #dt_checked tbody td:nth-child(1){ min-width:50px; }
+    #dt_checked tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*/
+    #dt_checked thead th:nth-child(2), #dt_checked tbody td:nth-child(2) { min-width:100px; }
+    #dt_checked tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*/
+    #dt_checked thead th:nth-child(3), #dt_checked tbody td:nth-child(3) { min-width:320px; }
+    #dt_checked tbody td:nth-child(3){ text-align:center; }
+    /*DATE*/
+    #dt_checked thead th:nth-child(4), #dt_checked tbody td:nth-child(4) { min-width:150px; }
+    #dt_checked tbody td:nth-child(4){ text-align:center; }
+    /*LINE*/
+    #dt_checked thead th:nth-child(5), #dt_checked tbody td:nth-child(5) { min-width:80px; }
+    #dt_checked tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*/
+    #dt_checked thead th:nth-child(6), #dt_checked tbody td:nth-child(6) { min-width:150px; }
+    #dt_checked tbody td:nth-child(6){ text-align:right; }
+    /*PWBNAME*/
+    #dt_checked thead th:nth-child(7), #dt_checked tbody td:nth-child(7){ min-width:150px; }
+    #dt_checked tbody td:nth-child(7){ text-align:left; }
+    /*PWBNO*/
+    #dt_checked thead th:nth-child(8), #dt_checked tbody td:nth-child(8){ min-width:120px; }
+    #dt_checked tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*/
+    #dt_checked thead th:nth-child(9), #dt_checked td:nth-child(9){ min-width:100px; }
+    #dt_checked tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*/
+    #dt_checked thead th:nth-child(10), #dt_checked tbody td:nth-child(10){ min-width:123px; }
+    #dt_checked tbody td:nth-child(10){ text-align:center; }
+    /*LOTSIZE*/
+    #dt_checked thead th:nth-child(11), #dt_checked tbody td:nth-child(11){ min-width:100px; }
+    #dt_checked tbody td:nth-child(11){ text-align:center; }
+    /*PIC*/
+    #dt_checked thead th:nth-child(12){ min-width:360px; }
+    #dt_checked thead .th2-1, #dt_checked thead .th2-2,
+	#dt_checked thead .th2-3 { min-width:120px !important; }
+    #dt_checked tbody td:nth-child(12){ min-width:120px; text-align:center;}
+    #dt_checked tbody td:nth-child(13){ min-width:120px; text-align:center;}
+    #dt_checked tbody td:nth-child(14){ min-width:120px; text-align:center;}
+
+	/*------------------------------*/
+    /* OPERATOR LOADING LIST TABLE */
+    /*----------------------------*/
+    /*NO*/
+    #dt_smpdesk th:nth-child(1), #dt_smpdesk td:nth-child(1){ min-width:50px; }
+    #dt_smpdesk td:nth-child(1){ text-align:center; }
+    /*ADDRS*/
+    #dt_smpdesk th:nth-child(2), #dt_smpdesk td:nth-child(2){ min-width:82px; }
+    #dt_smpdesk td:nth-child(2){ text-align:left; }
+    /*ZFEEDER*/
+    #dt_smpdesk th:nth-child(3), #dt_smpdesk td:nth-child(3) { min-width:202px; }
+    #dt_smpdesk td:nth-child(3){ text-align:left; }
+    /*POS*/
+    #dt_smpdesk th:nth-child(4), #dt_smpdesk td:nth-child(4) { min-width:72px; }
+    #dt_smpdesk td:nth-child(4){ text-align:center; }
+    /*PARTNUMBER*/
+    #dt_smpdesk th:nth-child(5), #dt_smpdesk td:nth-child(5){ min-width:192px; }
+    #dt_smpdesk td:nth-child(5){ text-align:right; }
+    /*DEMAND*/
+    #dt_smpdesk th:nth-child(6), #dt_smpdesk td:nth-child(6){ min-width:82px; }
+    #dt_smpdesk td:nth-child(6){ text-align:right; }
+    /*LOOSERREEL*/
+    #dt_smpdesk th:nth-child(7), #dt_smpdesk td:nth-child(7){ min-width:112px; }
+    #dt_smpdesk td:nth-child(7){ text-align:center; }
+    /*FULLRREEL*/
+    #dt_smpdesk th:nth-child(8), #dt_smpdesk td:nth-child(8){ min-width:112px; }
+    #dt_smpdesk td:nth-child(8){ text-align:center; }
+    /*KET*/
+    #dt_smpdesk th:nth-child(9){ width:100%; text-align:center; }
+    #dt_smpdesk td:nth-child(9){ width:100%; text-align:left; }
+
+
+	/*------------------------------*/
+    /* OPERATOR INSTALL TABLE */
+    /*----------------------------*/
+	#dt_installdesk tbody tr:first-child td{
+		font-weight: bold;
+		height: 60px;
+		background-color: #68EFAD;
+		font-size: 20px;
+		color: #000;
+		text-align: center;
+	}
+	/*NO*/
+	#dt_installdesk th:nth-child(1), #dt_installdesk td:nth-child(1){ min-width:50px; }
+    #dt_installdesk td:nth-child(1){ text-align:center; }
+    /*ZFEEDER*/
+    #dt_installdesk th:nth-child(2), #dt_installdesk td:nth-child(2){ min-width:212px; }
+    #dt_installdesk td:nth-child(2){ text-align:left; }
+    /*POL*/
+    #dt_installdesk th:nth-child(3), #dt_installdesk td:nth-child(3) { min-width:82px; }
+    #dt_installdesk td:nth-child(3){ text-align:left; }
+    /*POS*/
+    #dt_installdesk th:nth-child(4), #dt_installdesk td:nth-child(4) { min-width:72px; }
+    #dt_installdesk td:nth-child(4){ text-align:center; }
+    /*WFS*/
+    #dt_installdesk th:nth-child(5), #dt_installdesk td:nth-child(5){ min-width:82px; }
+    #dt_installdesk td:nth-child(5){ text-align:right; }
+    /*PSP*/
+    #dt_installdesk th:nth-child(6), #dt_installdesk td:nth-child(6){ min-width:82px; }
+    #dt_installdesk td:nth-child(6){ text-align:right; }
+    /*PARTNUMBER*/
+    #dt_installdesk th:nth-child(7), #dt_installdesk td:nth-child(7){ min-width:202px; }
+    #dt_installdesk td:nth-child(7){ text-align:center; }
+    /*DEMAND*/
+    #dt_installdesk th:nth-child(8), #dt_installdesk td:nth-child(8){ min-width:112px; }
+    #dt_installdesk td:nth-child(8){ text-align:center; }
+     /*INSTALL*/
+    #dt_installdesk th:nth-child(9), #dt_installdesk td:nth-child(9){ min-width:112px; }
+    #dt_installdesk td:nth-child(9){ text-align:center; }
+    /*KET*/
+    #dt_installdesk th:nth-child(10){ min-width:112px; text-align:center; }
+    #dt_installdesk td:nth-child(10){ min-width:112px; text-align:left; }
+
+	/*------------------------------*/
+    /* OPERATOR CHECKED TABLE */
+    /*----------------------------*/
+	#dt_checkeddesk tbody tr:first-child td{
+		font-weight: bold;
+		height: 60px;
+		background-color: #68EFAD;
+		font-size: 20px;
+		color: #000;
+		text-align: center;
+	}
+	/*NO*/
+	#dt_checkeddesk th:nth-child(1), #dt_checkeddesk td:nth-child(1){ min-width:50px; }
+    #dt_checkeddesk td:nth-child(1){ text-align:center; }
+    /*ZFEEDER*/
+    #dt_checkeddesk th:nth-child(2), #dt_checkeddesk td:nth-child(2){ min-width:212px; }
+    #dt_checkeddesk td:nth-child(2){ text-align:left; }
+    /*POL*/
+    #dt_checkeddesk th:nth-child(3), #dt_checkeddesk td:nth-child(3) { min-width:82px; }
+    #dt_checkeddesk td:nth-child(3){ text-align:left; }
+    /*POS*/
+    #dt_checkeddesk th:nth-child(4), #dt_checkeddesk td:nth-child(4) { min-width:72px; }
+    #dt_checkeddesk td:nth-child(4){ text-align:center; }
+    /*WFS*/
+    #dt_checkeddesk th:nth-child(5), #dt_checkeddesk td:nth-child(5){ min-width:82px; }
+    #dt_checkeddesk td:nth-child(5){ text-align:right; }
+    /*PSP*/
+    #dt_checkeddesk th:nth-child(6), #dt_checkeddesk td:nth-child(6){ min-width:82px; }
+    #dt_checkeddesk td:nth-child(6){ text-align:right; }
+    /*PARTNUMBER*/
+    #dt_checkeddesk th:nth-child(7), #dt_checkeddesk td:nth-child(7){ min-width:202px; }
+    #dt_checkeddesk td:nth-child(7){ text-align:center; }
+    /*DEMAND*/
+    #dt_checkeddesk th:nth-child(8), #dt_checkeddesk td:nth-child(8){ min-width:112px; }
+    #dt_checkeddesk td:nth-child(8){ text-align:center; }
+     /*INSTALL*/
+    #dt_checkeddesk th:nth-child(9), #dt_checkeddesk td:nth-child(9){ min-width:112px; }
+    #dt_checkeddesk td:nth-child(9){ text-align:center; }
+    /*KET*/
+    #dt_checkeddesk th:nth-child(10){ min-width:112px; text-align:center; }
+    #dt_checkeddesk td:nth-child(10){ min-width:112px; text-align:left; }
+
+	/*------------------------------------------------MODAL TABLE DETAIL SP --------------------------------------*/
+	/*NO*/
+    #dt_detailSP th:nth-child(1), #dt_detailSP td:nth-child(1){ min-width:48px; }
+    #dt_detailSP td:nth-child(1){ text-align:center; }
+    /*ZFEEDER*/
+    #dt_detailSP th:nth-child(2), #dt_detailSP td:nth-child(2) { min-width:220px; }
+    #dt_detailSP td:nth-child(2){ text-align:left; }
+    /*POL*/
+    #dt_detailSP th:nth-child(3), #dt_detailSP td:nth-child(3) { min-width:50px; }
+    #dt_detailSP td:nth-child(3){ text-align:center; }
+    /*POS*/
+    #dt_detailSP th:nth-child(4), #dt_detailSP td:nth-child(4) { min-width:50px; }
+    #dt_detailSP td:nth-child(4){ text-align:center; }
+    /*W/FS*/
+    #dt_detailSP th:nth-child(5), #dt_detailSP td:nth-child(5) { min-width:50px; }
+    #dt_detailSP td:nth-child(5){ text-align:center; }
+    /*P/SP*/
+    #dt_detailSP th:nth-child(6), #dt_detailSP td:nth-child(6) { min-width:50px; }
+    #dt_detailSP td:nth-child(6){ text-align:center; }
+    /*ADDRS*/
+    #dt_detailSP th:nth-child(7), #dt_detailSP td:nth-child(7){ min-width:70px; }
+    #dt_detailSP td:nth-child(7){ text-align:right; }
+    /*PART NUMBER*/
+    #dt_detailSP th:nth-child(8), #dt_detailSP td:nth-child(8){ min-width:140px; }
+    #dt_detailSP td:nth-child(8){ text-align:left; }
+    /*POINT*/
+    #dt_detailSP th:nth-child(9), #dt_detailSP td:nth-child(9){ min-width:70px; }
+    #dt_detailSP td:nth-child(9){ text-align:center; }
+    /*DEMAND*/
+    #dt_detailSP th:nth-child(10), #dt_detailSP td:nth-child(10){ min-width:80px; }
+    #dt_detailSP td:nth-child(10){ text-align:right; }
+    /*LOOSE REEL*/
+    #dt_detailSP th:nth-child(11), #dt_detailSP td:nth-child(11){ min-width:90px; }
+    #dt_detailSP td:nth-child(11){ text-align:center; }
+    /*FULL REEL*/
+    #dt_detailSP th:nth-child(12), #dt_detailSP td:nth-child(12){ min-width:90px; }
+    #dt_detailSP td:nth-child(12){ text-align:center; }
+    /*KET
+    #dt_detailSP th:nth-child(13), #dt_detailSP td:nth-child(13){ min-width:100px; }
+    #dt_detailSP td:nth-child(13){ text-align:center; }
+    /*KET*/
+    #dt_detailSP th:nth-child(13){ min-width:100px; text-align:center; }
+    #dt_detailSP td:nth-child(13){ min-width:83px; text-align:left; }
+    /*KET
+    #dt_detailSP th:nth-child(13){ min-width:100px; text-align:center; }
+    #dt_detailSP td:nth-child(13){ min-width:90px; text-align:left; }*/
+
+
+	/*new*/
+		/*------------------------------------------------------------------------------------- table -----------------*/
+		#tbl_install{
+			box-shadow: 0px 0px 50px #aaa;
+			border-radius: 0;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			width: calc(100% - 60px) !important;
+			margin-left: 50px;
+		}
+		#dt_install thead th + th{ border-left:1px solid #fff; }
+		#dt_install thead{ display: block; }
+		#dt_install tbody  { max-height: 380px; }
+		#dt_install tbody td{ font-size: 12px; }
+		#dt_install tbody{
+			display: block;
+			overflow-y: scroll;
+			position: static;
+		}
+		#dt_install thead th{
+			vertical-align: middle;
+			padding: 2px 2px;
+			text-align: center;
+			text-transform: uppercase;
+			font-size: 14px;
+			color: #fff;
+		}
+		#dt_install tbody td{
+			vertical-align: middle;
+			padding:2px 2px;
+			/*_white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 *
+			_white-space: -webkit-pre-wrap !important; /*Chrome & Safari  *
+			_white-space: -pre-wrap !important;      /* Opera 4-6 *
+			_white-space: pre-wrap !important;       /* css-3 *
+			_word-wrap: break-word !important;       /* Internet Explorer 5.5+ */
+
+			white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+			white-space: -webkit-pre-wrap; /*Chrome & Safari  */
+			white-space: -pre-wrap;      /* Opera 4-6 */
+			white-space: pre-wrap;       /* css-3 */
+			word-wrap: break-word;       /* Internet Explorer 5.5+ */
+			white-space: normal;
+			cursor: pointer;
+		}
+		#dt_install tbody tr:hover{
+			background-color: rgba(0, 0, 0, 0.3) !important;
+			color: #01395e;
+			font-weight: bold;
+		}
+		#dt_install thead th + th{ border-left:1px solid #fff; }
+		#dt_install thead th{ border-bottom:1px solid #fff; }
+		#dt_install tbody td + td{ border-left:1px solid #01395e; }
+		/*#dt_install tbody  td + td , */
+		#dt_install tbody tr + tr{
+			border-top: 1px solid rgba(125,125,125,0.5);
+			border-bottom: 1px solid rgba(125,125,125,0.5);
+		}
+		/*---------------------*/
+		/* INSTALL ADMIN TABLE */
+		/*-------------------*/
+		/*NO	1*/
+		#dt_install thead th:nth-child(1), #dt_install tbody td:nth-child(1){ min-width:40px; }
+		#dt_install tbody td:nth-child(1){ text-align:center; }
+		/*ACTION	2*/
+		#dt_install thead th:nth-child(2), #dt_install tbody td:nth-child(2) { min-width:150px;}
+		#dt_install tbody td:nth-child(2){ text-align:center; }
+		/*JOBNO	3*/
+		#dt_install thead th:nth-child(3), #dt_install tbody td:nth-child(3) { min-width:280px; }
+		#dt_install tbody td:nth-child(3){ text-align:center; }
+		/*DATE	4*/
+		#dt_install thead th:nth-child(4), #dt_install tbody td:nth-child(4) { min-width:80px; }
+		#dt_install tbody td:nth-child(4){ text-align:center; }
+		/*LINE	5*/
+		#dt_install thead th:nth-child(5), #dt_install tbody td:nth-child(5) { min-width:60px; }
+		#dt_install tbody td:nth-child(5){ text-align:center; }
+		/*MODELNAME	6*/
+		#dt_install thead th:nth-child(6), #dt_install tbody td:nth-child(6) { min-width:130px; }
+		#dt_install tbody td:nth-child(6){ text-align:left; }
+		/*PWBNAME (PROCESS)	7*/
+		#dt_install thead th:nth-child(7), #dt_install tbody td:nth-child(7){ min-width:120px; }
+		#dt_install tbody td:nth-child(7){ text-align:center; }
+		/*PWBNO	8*/
+		#dt_install thead th:nth-child(8), #dt_install tbody td:nth-child(8){ min-width:100px; }
+		#dt_install tbody td:nth-child(8){ text-align:right;}
+		/*PROCESS	9*/
+		#dt_install thead th:nth-child(9), #dt_install tbody td:nth-child(9){ min-width:90px; }
+		#dt_install tbody td:nth-child(9){ text-align:center; }
+		/*STARTSERIAL	10*/
+		#dt_install thead th:nth-child(10), #dt_install tbody td:nth-child(10){ min-width:70px; }
+		#dt_install tbody td:nth-child(10){ text-align:center; }
+		/*LOTSIZE	11*/
+		#dt_install thead th:nth-child(11), #dt_install tbody td:nth-child(11){ min-width:70px; }
+		#dt_install tbody td:nth-child(11){ text-align:center; }
+		/*PIC	12*/
+		#dt_install thead th:nth-child(12), #dt_install tbody td:nth-child(12){ min-width:90px; }
+		#dt_install tbody td:nth-child(12){ text-align:right; }
+		/*OPERATOR	13*/
+		#dt_install thead th:nth-child(13), #dt_install tbody td:nth-child(13){ min-width:90px; }
+		#dt_install tbody td:nth-child(13){ text-align:right; }
+		/*STARTDATE	14*/
+		#dt_install thead th:nth-child(14), #dt_install tbody td:nth-child(14){ min-width:80px; }
+		#dt_install tbody td:nth-child(14){ text-align:center; }
+		/*ENDDATE	15*/
+		#dt_install thead th:nth-child(15){ min-width:80px; text-align:center; }
+		#dt_install tbody td:nth-child(15){ min-width:64px; text-align:center; }
+
+	/*new*/
+
+	/***/
+	/* 	tabel partno */
+		.process{
+			background-color: yellow;
+			padding: 2px;
+			color: #000;
+		}
+		.clear{
+			_background-color: green;
+			color: green;
+			padding: 2px;
+			_color: #fff;
+		}
+		.unclear{
+			_background-color: blue;
+			color: blue;
+			padding: 2px;
+			_color: #fff;
+		}
+		.passed{
+			_background-color: red;
+			color: red;
+			padding: 2px;
+			_color: #fff;
+		}
+		#tbl_partno, #tbl_oll{
+			box-shadow: 0px 0px 50px #aaa;
+			border-radius: 0;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			width: calc(100% - 60px) !important;
+			margin-left: 50px;
+		}
+		#dt_partno,#dt_limit,#dt_oll{_width: 98%; background-color: #fff;}
+		#dt_partno thead, #dt_limit thead, #dt_partno thead, #dt_oll thead{ display: block; }
+		#dt_partno thead th, #dt_limit thead th,#dt_partno thead th,#dt_oll thead th{
+			vertical-align: middle;
+			text-align: center;
+			padding: 1px 1px;
+			text-transform: uppercase;
+			font-size: 12px;
+			color: #fff;
+		}
+		#dt_partno tbody, #dt_limit tbody, #dt_oll tbody{
+			display: block;
+			overflow-y: scroll;
+			position: static;
+			max-height: 380px;
+		}
+		#dt_partno tbody tr:hover, #dt_limit tbody tr:hover, #dt_oll tbody tr:hover{
+			background-color: rgba(0, 0, 0, 0.3) !important;
+			color: #01395e;
+			font-weight: bold;
+		}
+		#dt_partno tbody td,#dt_limit tbody td,#dt_oll tbody td{
+			vertical-align: middle;
+			padding:1px 1px;
+			white-space: -moz-pre-wrap;  	/* Mozilla, since 1999 */
+			white-space: -webkit-pre-wrap;  /*Chrome & Safari  */
+			white-space: -pre-wrap;      	/* Opera 4-6 */
+			white-space: pre-wrap;       	/* css-3 */
+			word-wrap: break-word;       	/* Internet Explorer 5.5+ */
+			white-space: normal;
+			cursor: pointer;
+			font-size: 12px;
+		}
+		#dt_partno thead th + th, #dt_limit thead th + th, #dt_oll thead th + th{ border-left:1px solid #fff; }
+		#dt_partno tbody td + td, #dt_limit tbody td + td, #dt_oll tbody td + td{ border-left:1px solid #01395e; }
+		#dt_partno tbody tr + tr, #dt_partno tbody  td + td,
+		#dt_limit tbody tr + tr, #dt_limit tbody  td + td,
+		#dt_oll tbody tr + tr, #dt_oll tbody  td + td{
+			border-top: 1px solid rgba(125,125,125,0.5);
+			border-bottom: 1px solid rgba(125,125,125,0.5);
+		}
+
+		/***
+		/*	--PARTNO---*/
+			/*NO	1*/
+			#dt_partno thead th:nth-child(1), #dt_partno tbody td:nth-child(1){ min-width:50px; }
+			#dt_partno tbody td:nth-child(1){ text-align:center; }
+			/*LINE	2*/
+			#dt_partno thead th:nth-child(2), #dt_partno tbody td:nth-child(2) { min-width:50px;}
+			#dt_partno tbody td:nth-child(2){ text-align:center; }
+			/*POINT	3*/
+			#dt_partno thead th:nth-child(3), #dt_partno tbody td:nth-child(3) { min-width:50px;}
+			#dt_partno tbody td:nth-child(3){ text-align:center; }
+			/*PARTNO	4*/
+			#dt_partno thead th:nth-child(4), #dt_partno tbody td:nth-child(4) { min-width:160px; }
+			#dt_partno tbody td:nth-child(4){ text-align:center; }
+			/*MODEL NAME 5*/
+			#dt_partno thead th:nth-child(5), #dt_partno tbody td:nth-child(5) { min-width:125px; }
+			#dt_partno tbody td:nth-child(5){ text-align:center; }
+			/*JOBNO	6*/
+			#dt_partno thead th:nth-child(6), #dt_partno tbody td:nth-child(6) { min-width:265px; }
+			#dt_partno tbody td:nth-child(6){ text-align:center; }
+			/*PROCESS	7*/
+			#dt_partno thead th:nth-child(7), #dt_partno tbody td:nth-child(7) { min-width:143px; }
+			#dt_partno tbody td:nth-child(7){ text-align:center; }
+			/*JOBDATE	9*/
+			#dt_partno thead th:nth-child(8), #dt_partno tbody td:nth-child(8){ min-width:90px; }
+			#dt_partno tbody td:nth-child(8){ text-align:center;}
+			/*STARTSERIAL	10*/
+			#dt_partno thead th:nth-child(9), #dt_partno tbody td:nth-child(9){ min-width:60px; }
+			#dt_partno tbody td:nth-child(9){ text-align:center; }
+			/*LOTSIZE	11*/
+			#dt_partno thead th:nth-child(10), #dt_partno tbody td:nth-child(10){ min-width:55px; }
+			#dt_partno tbody td:nth-child(10){ text-align:center; }
+			/*PICKING	12*/
+			#dt_partno thead th:nth-child(11), #dt_partno tbody td:nth-child(11){ min-width:70px; }
+			#dt_partno tbody td:nth-child(11){ text-align:center; }
+			/*INSTALL	13*/
+			#dt_partno thead th:nth-child(12), #dt_partno tbody td:nth-child(12){ min-width:70px; }
+			#dt_partno tbody td:nth-child(12){ text-align:center; }
+			/*CHECKED	14*/
+			#dt_partno thead th:nth-child(13), #dt_partno tbody td:nth-child(13){ min-width:70px; }
+			#dt_partno tbody td:nth-child(13){ text-align:center; }
+
+		/***/
+		/*	--LIMIT---*/
+			/*NO	1*/
+			#dt_limit thead th:nth-child(1), #dt_limit tbody td:nth-child(1){ min-width:4em; }
+			#dt_limit tbody td:nth-child(1){ text-align:center; }
+			/*LINE	2*/
+			#dt_limit thead th:nth-child(2), #dt_limit tbody td:nth-child(2) { min-width:4em;}
+			#dt_limit tbody td:nth-child(2){ text-align:center; }
+			/*JOBNO	3*/
+			#dt_limit thead th:nth-child(3), #dt_limit tbody td:nth-child(3) { min-width:22em; }
+			#dt_limit tbody td:nth-child(3){ text-align:center; }
+			/*ZFEEDER	4*/
+			#dt_limit thead th:nth-child(4), #dt_limit tbody td:nth-child(4) { min-width:11em; }
+			#dt_limit tbody td:nth-child(4){ text-align:center; }
+			/*MODEL NAME 5*/
+			#dt_limit thead th:nth-child(5), #dt_limit tbody td:nth-child(5) { min-width:10em; }
+			#dt_limit tbody td:nth-child(5){ text-align:center; }
+			/*PARTNO	6*/
+			#dt_limit thead th:nth-child(6), #dt_limit tbody td:nth-child(6) { min-width:11.5em; }
+			#dt_limit tbody td:nth-child(6){ text-align:center; }
+			/*POINT	7*/
+			#dt_limit thead th:nth-child(7), #dt_limit tbody td:nth-child(7) { min-width:4em; }
+			#dt_limit tbody td:nth-child(7){ text-align:center; }
+			/*LOOSE	8*/
+			#dt_limit thead th:nth-child(8), #dt_limit tbody td:nth-child(8) { min-width:7em; }
+			#dt_limit tbody td:nth-child(8){ text-align:center; }
+			/*FULL	9*/
+			#dt_limit thead th:nth-child(9), #dt_limit tbody td:nth-child(9) { min-width:7em; }
+			#dt_limit tbody td:nth-child(9){ text-align:center; }
+			/*PROCESS	10*/
+			#dt_limit thead th:nth-child(10), #dt_limit tbody td:nth-child(10){ min-width:9em; }
+			#dt_limit tbody td:nth-child(10){ text-align:center; }
+			/*JOBDATE	11*/
+			#dt_limit thead th:nth-child(11), #dt_limit tbody td:nth-child(11){ min-width:5.6em; }
+			#dt_limit tbody td:nth-child(11){ text-align:right;}
+			/*PICKING	12*/
+			#dt_limit thead th:nth-child(12), #dt_limit tbody td:nth-child(12){ min-width:5.6em; }
+			#dt_limit tbody td:nth-child(12){ text-align:center; }
+			/*INSTALL	13*/
+			#dt_limit thead th:nth-child(13), #dt_limit tbody td:nth-child(13){ min-width:5.6em; }
+			#dt_limit tbody td:nth-child(13){ text-align:center; }
+			/*CHECKED	14*/
+			#dt_limit thead th:nth-child(14), #dt_limit tbody td:nth-child(14){ min-width:5.6em; }
+			#dt_limit tbody td:nth-child(14){ text-align:center; }
+		
+		/***/
+		/*	--OLL---*/
+			/*NO	1*/
+			#dt_oll thead th:nth-child(1), #dt_oll tbody td:nth-child(1){ min-width:50px; }
+			#dt_oll tbody td:nth-child(1){ text-align:center; }
+			/*ACTION	2*/
+			#dt_oll thead th:nth-child(2), #dt_oll tbody td:nth-child(2) { min-width:80px;}
+			#dt_oll tbody td:nth-child(2){ text-align:center; }
+			/*DATE	3*/
+			#dt_oll thead th:nth-child(3), #dt_oll tbody td:nth-child(3) { min-width:80px;}
+			#dt_oll tbody td:nth-child(3){ text-align:center; }
+			/*JOBNO	4*/
+			#dt_oll thead th:nth-child(4), #dt_oll tbody td:nth-child(4) { min-width:265px; }
+			#dt_oll tbody td:nth-child(4){ text-align:center;}
+			/*MODEL NAME 5*/
+			#dt_oll thead th:nth-child(5), #dt_oll tbody td:nth-child(5) { min-width:120px; }
+			#dt_oll tbody td:nth-child(5){ text-align:center; }
+			/*PROCESS	6*/
+			#dt_oll thead th:nth-child(6), #dt_oll tbody td:nth-child(6) { min-width:100px; }
+			#dt_oll tbody td:nth-child(6){ text-align:center; }
+			/*START SERIAL	7*/
+			#dt_oll thead th:nth-child(7), #dt_oll tbody td:nth-child(7) { min-width:60px; }
+			#dt_oll tbody td:nth-child(7){ text-align:center; }
+			/*LOTSIZE	8*/
+			#dt_oll thead th:nth-child(8), #dt_oll tbody td:nth-child(8){ min-width:57px; }
+			#dt_oll tbody td:nth-child(8){ text-align:center;}
+			/*MCPROG 10*/
+			#dt_oll thead th:nth-child(9), #dt_oll tbody td:nth-child(9){ min-width:150px; }
+			#dt_oll tbody td:nth-child(9){ text-align:center; }
+			/*TOT INSERT point	11*/
+			#dt_oll thead th:nth-child(10), #dt_oll tbody td:nth-child(10){ min-width:80px; }
+			#dt_oll tbody td:nth-child(10){ text-align:center; }
+			/*EFFLOT	12*/
+			#dt_oll thead th:nth-child(11), #dt_oll tbody td:nth-child(11){ min-width:100px; }
+			#dt_oll tbody td:nth-child(11){ text-align:center; }
+			/*PICKING	13*/
+			#dt_oll thead th:nth-child(12), #dt_oll tbody td:nth-child(12){ min-width:70px; }
+			#dt_oll tbody td:nth-child(12){ text-align:center; }
+			/*INSTALL	14*/
+			#dt_oll thead th:nth-child(13), #dt_oll tbody td:nth-child(13){ min-width:70px; }
+			#dt_oll tbody td:nth-child(13){ text-align:center; }
+			/*CHECKED	14*/
+			#dt_oll thead th:nth-child(14), #dt_oll tbody td:nth-child(14){ min-width:70px; }
+			#dt_oll tbody td:nth-child(14){ text-align:center; }
+
+	/*---------------------------------------------------------------------- MOBILE SMART PICKING -------*/
+
+    #board{
+        font-family: 'RobotoCondensed';
+        position: absolute;
+		border-top: 5px solid #00b0ff; /*picking color*/
+        border-bottom: 5px solid #00b0ff; /*picking color*/
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 50px) !important;
+        margin-left: 40px;
+    }
+    #tbl_main{
+        width: 100%;
+        height: 100%;
+    }
+    #tbl_sp_header{
+        width: 100%;
+        border-bottom: solid 2px #00b0ff;
+    }
+    #tbl_sp_header tr{
+        width: 100%;
+    }
+    .sp_hd_judul{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+	.sp_hd_isi{
+        font-size: 40px;
+        text-align: center;
+        padding-right: 7px;
+        color: #01395e;
+        font-weight: bold;
+        width: 25%;
+    }
+    .sp_hd_judul_ins{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+	.sp_hd_isi_ins{
+        font-size: 40px;
+        text-align: center;
+        padding-right: 7px;
+        color: #01395e;
+        font-weight: bold;
+    }
+	.sp_hd_isi_row{
+        font-size: 24px;
+        text-align: center;
+        padding-right: 10px;
+        color: #01395e;
+        font-weight: bold;
+        width: 20%;
+    }
+    .sp_hd_isi_row>input{
+        width: 80%;
+    }
+	#slct_row, .slct_row{
+		font-size: 25px;
+		height: 40px;
+	}
+    #tbl_sp_main{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #tbl_sp_main tr{
+       width: 100%;
+    }
+    .sp_judul_atas{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+    .sp_judul{
+        font-size: 25px;
+        font-weight: bold;
+		color: #008080;
+    }
+    .sp_isi_partname{
+        font-size: 70px;
+        font-weight: bold;
+        text-align: center;
+        height: 80px;
+		color: #01395e;
+    }
+   .sp_isi{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+    }
+	.sp_isi_reel{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+    }
+	.sp_isi_chk{
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 100px;
+    }
+    .sp_footer{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+	/*------------------*/
+	.sp_judul_atas_addrs{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 30%;
+    }
+    .sp_isi_addrs{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 30%;
+    }
+	.sp_judul_atas_feeder{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 35%;
+    }
+    .sp_isi_feeder{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 35%;
+    }
+	.sp_judul_atas_pos{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 5%;
+    }
+    .sp_isi_pos{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 10%;
+    }
+	.sp_judul_atas_blank{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+		color: #008080;
+		width: 25%;
+    }
+    .sp_isi_blank{
+        font-size: 40px;
+        text-align: left;
+        font-weight: bold;
+        color: #01395e;
+		width: 30%;
+    }
+	.sp_judul_atas_blank_ins{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+		color: #008080;
+		width: 10%;
+    }
+    .sp_isi_blank_ins{
+        font-size: 40px;
+        text-align: left;
+        font-weight: bold;
+        color: #01395e;
+		width: 10%;
+    }
+	/*------------------*/
+    #ket{
+        width: 100%;
+    }
+    .btn-previous, .btn-partlist, .btn-next,.btn-previous-zfd, .btn-next-zfd, .btn-back{
+        border: none;
+        background-color: #008080;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fff;
+    }
+    .btn-previous, .btn-partlist, .btn-next, .btn-back{
+        width: 24%;
+		height: 50px;
+        font-size: 20px;
+    }
+    .btn-previous-zfd, .btn-next-zfd{
+        width: 100%;
+		padding: 0px;
+		height: 180px;
+        font-size: 20px;
+    }
+    .btn-previous:hover, .btn-partlist:hover, .btn-next:hover, .btn-back:hover,.btn-previous-zfd:hover, .btn-next-zfd:hover{
+        color: #fff;
+        background: #FA8F46;
+        font-size: 20px;
+    }
+    .spc{
+        height: 0px;
+    }
+    #judul_atas{
+        border-bottom: 2px solid #00b0ff;
+    }
+    /***/
+}
+/*
+@media only screen and (min-width: 963px) and (max-width: 1080px){
+	/*---------------------------------------------------------------------------*//*******
+    /*                       ( MIN-WIDTH 1101PX ) and (MAX-WIDTH 1200PX)   MENU  *//*******
+    /*---------------------------------------------------------------------------*//******
+    .nav-side-menu {
+        background-color: #01395e; /*background menu*
+        font-family: 'Open Sans', Arial, sans-serif;
+        overflow: auto;
+        height: 100%;
+        width: 420px;
+        position: fixed;
+        font-size: 18px;
+        font-weight: 400;
+        top: 0px;
+        box-shadow: 3px 0px 5px 0px;
+        z-index: 1030;
+        margin-left: -390px;
+    }
+    .nav-side-menu:hover {
+        margin-left: 0px;
+    }
+    #brand{
+        background-color: #FA8F46;
+        width: 420px;
+        text-align: center;
+        padding: 2px;
+    }
+    .nav-side-menu > .toggle-btn{ display: none !important; }
+    .menu-list{
+        background-color: #01395e;
+        width: 420px;
+    }
+    .menu-list>.menu-content{
+        padding:0px;
+        display: block;
+    }
+    .menu-list>.menu-content>li{
+        line-height: 3em;
+		height: 50px;
+    }
+    .menu-list>.menu-content>li>a{
+        color: #fff;
+        position: fixed;
+        width: 420px;
+        text-decoration: none;
+    }
+    .menu-list>.menu-content>li>a:hover{
+        background-color: #FA8F46;
+        font-weight: bold;
+		height: 50px;
+        border-left: 5px solid #fff;
+        border-right: 4px solid #fff;
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    .menu-list>.menu-content>li>a>i{
+		padding-top: 15px;
+		padding-right: 5px;
+	}
+	.fixedtitle{
+		position: fixed;
+		top: 0;
+		z-index: 1;
+		width: 100%;
+	}
+	#titleDash{
+		background-color: #FA8F46;
+		color: #01395e;
+		font-weight: bold;
+		text-align: center;
+		font-size: 30px;
+		font-family: "Captureit";
+		height: 40px;
+	}
+	.btn-title{
+		background-color: #01395e !important;
+		border-radius: 0px;
+		height: 40px;
+		color: #fff !important;
+		font-family: 'Open Sans', Arial, sans-serif;
+		top: -5px;
+	}
+	.btn-title:hover, .btn-title:target{
+		background-color: #008080 !important;
+		border-radius: 0px;
+		height: 40px;
+		color: #fff !important;
+		font-weight: bold;
+		font-family: 'Open Sans', Arial, sans-serif;
+	}
+
+    /*---------------------------------------------------------------------------*
+    /*                  ( MIN-WIDTH 768PX ) AND (MAX-WIDTH 1100PX) SEARCH DATA   *
+    /*---------------------------------------------------------------------------*
+    #rb_search{ background-color: #596e89; }
+    td>input[type="radio"]{ display: none; }
+    td>.rb{
+        display: inline-block;
+        text-align: center;
+        background-color: #596e89;
+        color: #fff;
+        width: 49%;
+        padding: 10px 0px;
+        font-size:14px;
+        margin: 0px;
+    }
+    td>input[type="radio"]:checked + label { background-color:#a0b3d4; }
+    .poscenter{text-align:center;}
+
+    /*------------------------------------------------------------------------- > 963 desktop search ---*
+	 #content{
+		 top: 80px;
+		 position: relative;
+	 }
+	 .search-label{
+        width: 15%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .search-input{
+        width: 18%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .search-button{
+        width: 32%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+    .search-label-2{
+        width: 10%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .search-input-2{
+        width: 39%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .search-button-2{
+        width: 48%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+    .panel-picknav, #tbl_joblist, #tbl_install, #tbl_loadlist, #tbl_smpdesk, #tbl_installdesk,#tbl_checkeddesk,
+	#tbl_installdata,#tbl_checked, .scan_partnumber{
+        width: calc(100% - 50px) !important;
+        margin-left: 40px;
+    }
+	/*--------------------------------------------------------------------- JOBLIST TABLE ---------------*
+	.btn-detail, .btn-pass, .btn-unfinish{
+        display: inline-block;
+        margin-bottom: 2px;
+        margin-top: 2px;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 2;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+        background-image: none;
+        border-radius: 4px;
+        border-radius: 0;
+        border: 0 none;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+	.btn-detail{color: #fff; background: #0099cc;}
+	.btn-pass{color: #fff; background: green;}
+	.btn-unfinish{color: #fff; background: red;}
+    .btn-detail:hover, .btn-detail:focus, .btn-detail:active, .btn-detail.active {
+        color: #fff;
+        background: #FA8F46;
+    }
+    .btn-unfinish:hover, .btn-unfinish:focus, .btn-unfinish:active, .btn-unfinish.active {
+        color: #fff;
+        background: #ff4d4d;
+    }
+    .btn-detail:focus, .btn-detail:active:focus, .btn-detail.active:focus,
+    .btn-pass:focus, .btn-pass:active:focus, .btn-pass.active:focus { outline: 0 none; }
+    .btn-pass:hover, .btn-pass:focus, .btn-pass:active, .btn-pass.active {
+        color: #000;
+        background: lightgreen;
+    }
+    tr[#dt_joblist]:hover,tr[#dt_joblist]:hover, tr[#dt_smpdesk]:hover,tr[#dt_checkeddesk]:hover,tr[#dt_installdesk]:hover, tr[#dt_detailSP]:hover{ background: #FA8F46; font-size: 14px; }
+    #dt_joblist, #dt_loadlist,#dt_install, #dt_smpdesk, #dt_installdesk,#dt_checkeddesk, #dt_detailSP { background-color:#e7e4e4; }
+    #dt_joblist thead, #dt_loadlist thead, #dt_smpdesk thead, #dt_installdesk thead,#dt_checkeddesk thead, #dt_detailSP thead{
+ 		background-color: #a2a78b; /*#AF754D*
+        display: block;
+		border-left: 2px solid #a2a78b; /*#AF754D*
+		border-right: 2px solid #a2a78b; /*#AF754D*
+    }
+	#dt_joblist tbody,#dt_loadlist tbody,#dt_install tbody, #dt_smpdesk tbody,#dt_installdesk tbody,#dt_checkeddesk tbody, #dt_detailSP tbody{
+        display: block;
+        overflow-y: scroll;
+        max-height: 600px;
+        position: static;
+		border-left: 2px solid #a2a78b; /*#AF754D*
+		border-right: 2px solid #a2a78b; /*#AF754D*
+		border-bottom: 2px solid #a2a78b; /*#AF754D*
+
+    }
+	#dt_joblist thead th, #dt_loadlist thead th,#dt_install thead th, #dt_smpdesk thead th,#dt_installdesk thead th,#dt_checkeddesk thead th, #dt_detailSP thead th{
+        vertical-align: top;
+        padding: 8px 8px;
+        text-align: center;
+        text-transform: uppercase;
+		font-size: 15px;
+		color: #fff;
+    }
+    #dt_joblist tbody td, #dt_loadlist tbody td,#dt_install tbody td, #dt_smpdesk tbody td, #dt_installdesk tbody td, #dt_checkeddesk tbody td{
+        vertical-align: middle;
+        padding:4px 4px;
+        white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 *
+        white-space: -webkit-pre-wrap; /*Chrome & Safari  *
+        white-space: -pre-wrap;      /* Opera 4-6 *
+        white-space: pre-wrap;       /* css-3 *
+        word-wrap: break-word;       /* Internet Explorer 5.5+ *
+        white-space: normal;
+        font-size: 15px;
+        cursor: pointer;
+		height: 40px;
+    }
+	#dt_joblist tbody tr:hover, #dt_loadlist tbody tr:hover,#dt_install tbody tr:hover, #dt_smpdesk tbody tr:hover,#dt_checkeddesk tbody tr:hover,#dt_installdesk tbody tr:hover, #dt_detailSP tbody tr:hover {
+        background-color: rgba(0, 179, 179, 0.3);
+        color: #01395e;
+        font-weight: bold;
+    }
+	#dt_joblist thead th + th, #dt_loadlist thead th + th, #dt_install thead th + th,
+    #dt_smpdesk thead th + th,  #dt_installdesk thead th + th, #dt_checkeddesk thead th + th, #dt_detailSP thead th + th
+	{ border-left:1px solid #fff; /*#AF754D* }
+    #dt_joblist tbody td + td, #dt_smpdesk tbody td + td, #dt_checkeddesk tbody td + td, #dt_installdesk tbody td + td,
+	#dt_loadlist tbody  td + td ,#dt_install tbody  td + td , #dt_detailSP tbody td + td
+	{ border-left:1px solid #a2a78b; /*#AF754D* }
+
+	.dt_zfeed thead{
+		background-color: #a2a78b;
+		color: #fff;
+	}
+	.dt_zfeed thead th{
+		border-left: solid 1px #fff;
+	}
+	.dt_zfeed tbody td{
+		border-left: solid 1px #a2a78b;
+	}
+	#dt_detaillist tbody td{
+		border: solid 1px #a2a78b;
+	}
+	.dt_zfeed, #dt_detaillist{
+		border: solid 1px #a2a78b;
+	}
+	/*-------------------------------------------------*
+	.dt_zfeed thead th:nth-child(1), .dt_zfeed tbody td:nth-child(1){ width:3px; }
+    .dt_zfeed tbody td:nth-child(1){ text-align:center; }
+	.dt_zfeed thead th:nth-child(2), .dt_zfeed tbody td:nth-child(2){ width:5px; }
+    .dt_zfeed tbody td:nth-child(2){ text-align:center; }
+	/*-------------------------------------------------*
+	#dt_detaillist tbody td:nth-child(1){
+		text-align:center;
+		background-color: #a2a78b;
+		color: #fff;
+		border-bottom: 1px solid #fff;
+		text-align: right;
+		width: 150px;
+	}
+	/*-------------------------------------------------*
+	/*----------------*
+    /* JOBLIST TABLE *
+    /*--------------*
+    /*NO*
+    #dt_joblist thead th:nth-child(1), #dt_joblist tbody td:nth-child(1){ min-width:40px; }
+    #dt_joblist tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*
+    #dt_joblist thead th:nth-child(2), #dt_joblist tbody td:nth-child(2) { min-width:150px; }
+    #dt_joblist tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*
+    #dt_joblist thead th:nth-child(3), #dt_joblist tbody td:nth-child(3) { min-width:320px; }
+    #dt_joblist tbody td:nth-child(3){ text-align:center; }
+    /*DATE*
+    #dt_joblist thead th:nth-child(4), #dt_joblist tbody td:nth-child(4) { min-width:100px; }
+    #dt_joblist tbody td:nth-child(4){ text-align:center; }
+    /*LINE*
+    #dt_joblist thead th:nth-child(5), #dt_joblist tbody td:nth-child(5) { min-width:60px; }
+    #dt_joblist tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*
+    #dt_joblist thead th:nth-child(6), #dt_joblist tbody td:nth-child(6) { min-width:150px; }
+    #dt_joblist tbody td:nth-child(6){ text-align:right; }
+    /*PWBNAME*
+    #dt_joblist thead th:nth-child(7), #dt_joblist tbody td:nth-child(7){ min-width:150px; }
+    #dt_joblist tbody td:nth-child(7){ text-align:left; }
+    /*PWBNO*
+    #dt_joblist thead th:nth-child(8), #dt_joblist tbody td:nth-child(8){ min-width:120px; }
+    #dt_joblist tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*
+    #dt_joblist thead th:nth-child(9), #dt_joblist td:nth-child(9){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*
+    #dt_joblist thead th:nth-child(10), #dt_joblist tbody td:nth-child(10){ min-width:150px; }
+    #dt_joblist tbody td:nth-child(10){ text-align:right; }
+    /*LOTSIZE*
+    #dt_joblist thead th:nth-child(11), #dt_joblist tbody td:nth-child(11){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(11){ text-align:left; }
+    /*PIC*
+    #dt_joblist thead th:nth-child(12), #dt_joblist tbody td:nth-child(12){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(12){ text-align:left; }
+    /*OP*
+    #dt_joblist thead th:nth-child(13), #dt_joblist tbody td:nth-child(13){ min-width:100px; }
+    #dt_joblist tbody td:nth-child(13){ text-align:left; }
+    /*STDATE*
+    #dt_joblist thead th:nth-child(14), #dt_joblist tbody td:nth-child(14){ min-width:130px; }
+    #dt_joblist tbody td:nth-child(14){ text-align:center; }
+    /*ENDATE*
+    #dt_joblist thead th:nth-child(15), #dt_joblist tbody td:nth-child(15){ min-width:130px; }
+    #dt_joblist tbody td:nth-child(15){ text-align:center; }
+
+	/*---------------------*/
+    /* LOADING LIST TABLE */
+    /*-------------------*/
+    /*NO*
+    #dt_loadlist thead th:nth-child(1), #dt_loadlist tbody td:nth-child(1){ min-width:40px; }
+    #dt_loadlist tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*
+    #dt_loadlist thead th:nth-child(2), #dt_loadlist tbody td:nth-child(2) { min-width:78px; }
+    #dt_loadlist tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*
+    #dt_loadlist thead th:nth-child(3), #dt_loadlist tbody td:nth-child(3) { min-width:320px; }
+    #dt_loadlist tbody td:nth-child(3){ text-align:center; }
+    /*DATE*
+    #dt_loadlist thead th:nth-child(4), #dt_loadlist tbody td:nth-child(4) { min-width:135px; }
+    #dt_loadlist tbody td:nth-child(4){ text-align:center; }
+    /*LINE*
+    #dt_loadlist thead th:nth-child(5), #dt_loadlist tbody td:nth-child(5) { min-width:70px; }
+    #dt_loadlist tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*
+    #dt_loadlist thead th:nth-child(6), #dt_loadlist tbody td:nth-child(6) { min-width:140px; }
+    #dt_loadlist tbody td:nth-child(6){ text-align:right; }
+    /*PWBNAME*
+    #dt_loadlist thead th:nth-child(7), #dt_loadlist tbody td:nth-child(7){ min-width:150px; }
+    #dt_loadlist tbody td:nth-child(7){ text-align:left; }
+    /*PWBNO*
+    #dt_loadlist thead th:nth-child(8), #dt_loadlist tbody td:nth-child(8){ min-width:110px; }
+    #dt_loadlist tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*
+    #dt_loadlist thead th:nth-child(9), #dt_loadlist tbody td:nth-child(9){ min-width:90px; }
+    #dt_loadlist tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*
+    #dt_loadlist thead th:nth-child(10), #dt_loadlist tbody td:nth-child(10){ min-width:70px; }
+    #dt_loadlist tbody td:nth-child(10){ text-align:right; }
+    /*LOTSIZE*
+    #dt_loadlist thead th:nth-child(11), #dt_loadlist tbody td:nth-child(11){ min-width:70px; }
+    #dt_loadlist tbody td:nth-child(11){ text-align:left; }
+    /*PIC*
+    #dt_loadlist thead th:nth-child(12), #dt_loadlist tbody td:nth-child(12){ min-width:100px; }
+    #dt_loadlist tbody td:nth-child(12){ text-align:right; }
+    /*OP*
+    #dt_loadlist thead th:nth-child(13){ width:100px; text-align:center; }
+    #dt_loadlist tbody td:nth-child(13){ width:100px; text-align:center; }
+    /*---------------------*/
+    /* INSTALL ADMIN TABLE */
+    /*-------------------*/
+    /*NO*
+    #dt_install thead th:nth-child(1), #dt_install tbody td:nth-child(1){ min-width:40px; }
+    #dt_install tbody td:nth-child(1){ text-align:center; }
+    /*ACTION*
+    #dt_install thead th:nth-child(2), #dt_install tbody td:nth-child(2) { min-width:78px; }
+    #dt_install tbody td:nth-child(2){ text-align:center; }
+    /*JOBNO*
+    #dt_install thead th:nth-child(3), #dt_install tbody td:nth-child(3) { min-width:320px; }
+    #dt_install tbody td:nth-child(3){ text-align:center; }
+    /*DATE*
+    #dt_install thead th:nth-child(4), #dt_install tbody td:nth-child(4) { min-width:135px; }
+    #dt_install tbody td:nth-child(4){ text-align:center; }
+    /*LINE*
+    #dt_install thead th:nth-child(5), #dt_install tbody td:nth-child(5) { min-width:70px; }
+    #dt_install tbody td:nth-child(5){ text-align:center; }
+    /*MODELNAME*
+    #dt_install thead th:nth-child(6), #dt_install tbody td:nth-child(6) { min-width:140px; }
+    #dt_install tbody td:nth-child(6){ text-align:right; }
+    /*PWBNAME*
+    #dt_install thead th:nth-child(7), #dt_install tbody td:nth-child(7){ min-width:150px; }
+    #dt_install tbody td:nth-child(7){ text-align:left; }
+    /*PWBNO*
+    #dt_install thead th:nth-child(8), #dt_install tbody td:nth-child(8){ min-width:110px; }
+    #dt_install tbody td:nth-child(8){ text-align:right; }
+    /*PROCESS*
+    #dt_install thead th:nth-child(9), #dt_install tbody td:nth-child(9){ min-width:90px; }
+    #dt_install tbody td:nth-child(9){ text-align:center; }
+    /*STARTSERIAL*
+    #dt_install thead th:nth-child(10), #dt_install tbody td:nth-child(10){ min-width:70px; }
+    #dt_install tbody td:nth-child(10){ text-align:right; }
+    /*LOTSIZE*
+    #dt_install thead th:nth-child(11), #dt_install tbody td:nth-child(11){ min-width:70px; }
+    #dt_install tbody td:nth-child(11){ text-align:left; }
+    /*PIC*
+    #dt_install thead th:nth-child(12), #dt_install tbody td:nth-child(12){ min-width:100px; }
+    #dt_install tbody td:nth-child(12){ text-align:right; }
+    /*OP*
+    #dt_install thead th:nth-child(13){ width:100px; text-align:center; }
+    #dt_install tbody td:nth-child(13){ width:100px; text-align:center; }
+
+	/*------------------------------*/
+    /* OPERATOR LOADING LIST TABLE */
+    /*----------------------------*/
+    /*NO*
+    #dt_smpdesk th:nth-child(1), #dt_smpdesk td:nth-child(1){ min-width:50px; }
+    #dt_smpdesk td:nth-child(1){ text-align:center; }
+    /*ADDRS*
+    #dt_smpdesk th:nth-child(2), #dt_smpdesk td:nth-child(2){ min-width:82px; }
+    #dt_smpdesk td:nth-child(2){ text-align:left; }
+    /*ZFEEDER*
+    #dt_smpdesk th:nth-child(3), #dt_smpdesk td:nth-child(3) { min-width:202px; }
+    #dt_smpdesk td:nth-child(3){ text-align:left; }
+    /*POS*
+    #dt_smpdesk th:nth-child(4), #dt_smpdesk td:nth-child(4) { min-width:72px; }
+    #dt_smpdesk td:nth-child(4){ text-align:center; }
+    /*PARTNUMBER*
+    #dt_smpdesk th:nth-child(5), #dt_smpdesk td:nth-child(5){ min-width:192px; }
+    #dt_smpdesk td:nth-child(5){ text-align:right; }
+    /*DEMAND*
+    #dt_smpdesk th:nth-child(6), #dt_smpdesk td:nth-child(6){ min-width:82px; }
+    #dt_smpdesk td:nth-child(6){ text-align:right; }
+    /*LOOSERREEL*
+    #dt_smpdesk th:nth-child(7), #dt_smpdesk td:nth-child(7){ min-width:112px; }
+    #dt_smpdesk td:nth-child(7){ text-align:center; }
+    /*FULLRREEL*
+    #dt_smpdesk th:nth-child(8), #dt_smpdesk td:nth-child(8){ min-width:112px; }
+    #dt_smpdesk td:nth-child(8){ text-align:center; }
+    /*KET*
+    #dt_smpdesk th:nth-child(9){ width:100%; text-align:center; }
+    #dt_smpdesk td:nth-child(9){ width:100%; text-align:left; }
+    /*------------------------------*/
+    /* OPERATOR INSTALL TABLE */
+    /*----------------------------*/
+    /*NO*
+    #dt_installdesk th:nth-child(1), #dt_installdesk td:nth-child(1){ min-width:50px; }
+    #dt_installdesk td:nth-child(1){ text-align:center; }
+    /*ADDRS*
+    #dt_installdesk th:nth-child(2), #dt_installdesk td:nth-child(2){ min-width:82px; }
+    #dt_installdesk td:nth-child(2){ text-align:left; }
+    /*ZFEEDER*
+    #dt_installdesk th:nth-child(3), #dt_installdesk td:nth-child(3) { min-width:202px; }
+    #dt_installdesk td:nth-child(3){ text-align:left; }
+    /*POS*
+    #dt_installdesk th:nth-child(4), #dt_installdesk td:nth-child(4) { min-width:72px; }
+    #dt_installdesk td:nth-child(4){ text-align:center; }
+    /*PARTNUMBER*
+    #dt_installdesk th:nth-child(5), #dt_installdesk td:nth-child(5){ min-width:192px; }
+    #dt_installdesk td:nth-child(5){ text-align:right; }
+    /*DEMAND*
+    #dt_installdesk th:nth-child(6), #dt_installdesk td:nth-child(6){ min-width:100px; }
+    #dt_installdesk td:nth-child(6){ text-align:right; }
+    /*install*
+    #dt_installdesk th:nth-child(7), #dt_installdesk td:nth-child(7){ min-width:100px; }
+    #dt_installdesk td:nth-child(7){ text-align:center; }
+    /*KET*
+    #dt_installdesk th:nth-child(8){ width:100%; text-align:center; }
+    #dt_installdesk td:nth-child(8){ width:100%; text-align:left; }
+    /*------------------------------*/
+    /* OPERATOR CHECKED TABLE */
+    /*----------------------------*/
+    /*NO*
+    #dt_checkeddesk th:nth-child(1), #dt_checkeddesk td:nth-child(1){ min-width:50px; }
+    #dt_checkeddesk td:nth-child(1){ text-align:center; }
+    /*ADDRS*
+    #dt_checkeddesk th:nth-child(2), #dt_checkeddesk td:nth-child(2){ min-width:82px; }
+    #dt_checkeddesk td:nth-child(2){ text-align:left; }
+    /*ZFEEDER*
+    #dt_checkeddesk th:nth-child(3), #dt_checkeddesk td:nth-child(3) { min-width:202px; }
+    #dt_checkeddesk td:nth-child(3){ text-align:left; }
+    /*POS*
+    #dt_checkeddesk th:nth-child(4), #dt_checkeddesk td:nth-child(4) { min-width:72px; }
+    #dt_checkeddesk td:nth-child(4){ text-align:center; }
+    /*PARTNUMBER*
+    #dt_checkeddesk th:nth-child(5), #dt_checkeddesk td:nth-child(5){ min-width:192px; }
+    #dt_checkeddesk td:nth-child(5){ text-align:right; }
+    /*DEMAND*
+    #dt_checkeddesk th:nth-child(6), #dt_checkeddesk td:nth-child(6){ min-width:100px; }
+    #dt_checkeddesk td:nth-child(6){ text-align:right; }
+    /*install*
+    #dt_checkeddesk th:nth-child(7), #dt_checkeddesk td:nth-child(7){ min-width:100px; }
+    #dt_checkeddesk td:nth-child(7){ text-align:center; }
+    /*KET*
+    #dt_checkeddesk th:nth-child(8){ width:100%; text-align:center; }
+    #dt_checkeddesk td:nth-child(8){ width:100%; text-align:left; }
+
+	/*---------------------------------------------------------------------- MOBILE SMART PICKING -------*/
+
+    /*#board{
+        font-family: 'RobotoCondensed';
+        position: absolute;
+        border-top: 5px solid #FA8F46;
+        border-bottom: 5px solid #FA8F46;
+		top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(100% - 50px) !important;
+        margin-left: 40px;
+    }*
+    #tbl_main{
+        width: 100%;
+        height: 100%;
+    }
+    #tbl_sp_header{
+        width: 100%;
+        border-bottom: solid 2px #fa8f46;
+    }
+    #tbl_sp_header tr{
+        width: 100%;
+    }
+    .sp_hd_judul{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+	.sp_hd_isi{
+        font-size: 40px;
+        text-align: center;
+        padding-right: 7px;
+        color: #01395e;
+        font-weight: bold;
+        width: 25%;
+    }
+    .sp_hd_judul_ins{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 15%;
+    }
+	.sp_hd_isi_ins{
+        font-size: 40px;
+        text-align: center;
+        padding-right: 7px;
+        color: #01395e;
+        font-weight: bold;
+        width: 15%;
+    }
+    .sp_hd_isi_row{
+        font-size: 24px;
+        text-align: center;
+        padding-right: 10px;
+        color: #01395e;
+        font-weight: bold;
+        width: 20%;
+    }
+    .sp_hd_isi_row>input{
+        width: 80%;
+    }
+	#slct_row, .slct_row{
+		font-size: 25px;
+		height: 40px;
+	}
+    #tbl_sp_main{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #tbl_sp_main tr{
+       width: 100%;
+    }
+    .sp_judul_atas{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+    .sp_judul{
+        font-size: 25px;
+        font-weight: bold;
+		color: #008080;
+    }
+    .sp_isi_partname{
+        font-size: 70px;
+        font-weight: bold;
+        text-align: center;
+        height: 80px;
+		color: #01395e;
+    }
+   .sp_isi_reel{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+    }
+	.sp_isi{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+    }
+	.sp_isi_chk{
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 100px;
+    }
+    .sp_footer{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+	/*------------------*
+	.sp_judul_atas_addrs{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 30%;
+    }
+    .sp_isi_addrs{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 30%;
+    }
+	.sp_judul_atas_feeder{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 35%;
+    }
+    .sp_isi_feeder{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 35%;
+    }
+	.sp_judul_atas_pos{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 5%;
+    }
+    .sp_isi_pos{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 5%;
+    }
+	.sp_judul_atas_blank{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+		color: #008080;
+		width: 30%;
+    }
+    .sp_isi_blank{
+        font-size: 40px;
+        text-align: left;
+        font-weight: bold;
+        color: #01395e;
+		width: 30%;
+    }
+	.sp_judul_atas_blank_ins{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+		color: #008080;
+		width: 10%;
+    }
+    .sp_isi_blank_ins{
+        font-size: 40px;
+        text-align: left;
+        font-weight: bold;
+        color: #01395e;
+		width: 10%;
+    }
+	/*------------------*
+    #ket{
+        width: 100%;
+    }
+    .btn-previous, .btn-partlist, .btn-next, .btn-back{
+        width: 24%;
+        border: none;
+        background-color: #008080;
+        height: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fff;
+        font-size: 20px;
+    }
+    .btn-previous:hover, .btn-partlist:hover, .btn-next:hover, .btn-back:hover{
+        color: #fff;
+        background: #FA8F46;
+        font-size: 20px;
+    }
+    .spc{
+        height: 0px;
+    }
+    #judul_atas{
+        border-bottom: 2px solid #fa8f46;
+    }
+}
+@media only screen and (max-width:962px) {
+	/*----------------------------------------------------MENU LIST ---------------*
+	.nav-side-menu{
+        position:fixed;
+        right:0;
+        left:0;
+        z-index:1030
+    }
+    .nav-side-menu > .toggle-btn{
+        display: block;
+        position: absolute;
+        right: 5px;
+        top: 3px;
+        color: #fff;
+        border-radius: 0px;
+        cursor: pointer;
+        background-color: #fff;
+        color: #01395e;
+        text-align: center;
+        width: 35px;
+    }
+    #brand{
+        background-color: #FA8F46;
+        height: 35px;
+        padding-top: 2px;
+        padding-left: 5px;
+    }
+    .menu-list{ background-color: #01395e; border-bottom: 3px solid #008080;}
+    .menu-list>.menu-content{ padding:0px; }
+    .menu-list>.menu-content>li{ line-height: 2em; }
+    .menu-list>.menu-content>li>a{
+        color: #fff;
+        position: absolute;
+        width: 100%;
+        text-decoration: none;
+    }
+    .menu-list>.menu-content>li>a:hover{
+        background-color: 008080;
+        font-weight: bold;
+        border-left: 5px solid #fff;
+        border-right: 4px solid #fff;
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+    .menu-list>.menu-content>li>a>i{ padding: 5px; }
+    /*---------------------------------------------------------------------------*/
+    /*                                            ( MAX-WIDTH 767PX )  SUB-MENU  */
+    /*---------------------------------------------------------------------------*
+    .menu-list>.menu-content>ul{ padding:0px; }
+    .menu-list>.menu-content>ul>li{ line-height: 2em; }
+    .menu-list>.menu-content>ul>li>a{
+        color: #fff;
+        position: absolute;
+        width: 100%;
+        text-decoration: none;
+    }
+    .menu-list>.menu-content>ul>li>a>i{ padding: 5px; }
+    .menu-list>.menu-content>ul>li>a:hover{
+        background-color: darkseagreen;
+        font-weight: bold;
+        border-left: 5px solid #fff;
+        border-right: 4px solid #fff;
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }
+	.fixedtitle{
+		position: fixed;
+		top: 0;
+		z-index: 1;
+		width: 100%;
+	}
+	#titleDash{
+		background-color: #FA8F46;
+		color: #01395e;
+		font-weight: bold;
+		text-align: center;
+		font-size: 30px;
+		font-family: "Captureit";
+		height: 40px;
+	}
+	.btn-title{
+		background-color: #01395e !important;
+		border-radius: 0px;
+		height: 40px;
+		color: #fff !important;
+		font-family: 'Open Sans', Arial, sans-serif;
+		top: -5px;
+	}
+	.btn-title:hover, .btn-title:target{
+		_background-color: #FA8F46 !important;
+		background-color: #008080 !important;
+		border-radius: 0px;
+		height: 40px;
+		color: #fff !important;
+		font-weight: bold;
+		font-family: 'Open Sans', Arial, sans-serif;
+	}
+	/*---------------------------------------------------------------------------*/
+    /*                                        ( MAX-WIDTH 768PX )  SEARCH DATA   */
+    /*---------------------------------------------------------------------------*
+    #rb_search{ background-color: #596e89; }
+    td>input[type="radio"]{ display: none; }
+    td>.rb{
+        display: inline-block;
+        text-align: center;
+        background-color: #596e89;
+        color: #fff;
+        width: 49%;
+        padding: 5px 0px;
+        font-size:14px;
+        margin: 0px;
+    }
+    td>input[type="radio"]:checked + label { background-color:#a0b3d4; }
+    .poscenter{text-align:center;}
+	/*---------------------------------------------------------------------------*/
+    /*                                       ( MAX-WIDTH 767PX )  MOBILE SEARCH  */
+    /*---------------------------------------------------------------------------*
+    #content{
+		 top: 80px;
+		 position: relative;
+	 }
+	 .search-label{
+        width: 30%;
+        float: left;
+        height: 25px;
+        line-height: 25px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 5px;
+        font-size: 12px;
+    }
+    .search-input{
+        width: 69%;
+        float: left;
+        height: 30px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .search-button{
+        width: 100%;
+        float: left;
+        height: 30px;
+        margin-top: 2px;
+        padding-right: 5px;
+        border-radius: 0;
+    }
+    .search-label-2{
+        width: 15%;
+        float: left;
+        height: 35px;
+        line-height: 30px;
+        margin-top: 2px;
+        margin-left: 0px;
+        padding-left: 10px;
+    }
+    .search-input-2{
+        width: 34%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 2px;
+        border-radius: 0;
+    }
+    .search-button-2{
+        width: 48%;
+        float: left;
+        height: 35px;
+        margin-top: 2px;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-radius: 0;
+    }
+	/*---------------------------------------------------------------------------*/
+    /*                                ( MAX-WIDTH 767PX )  MOBILE JOBLIST TABLE  */
+    /*---------------------------------------------------------------------------*
+    .btn-detail, .btn-pass, .btn-unfinish{
+        display: inline-block;
+        margin-bottom: 2px;
+        margin-top: 2px;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 2;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+        background-image: none;
+        border-radius: 4px;
+        border-radius: 0;
+        border: 0 none;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+	.btn-detail{color: #fff; background: #0099cc;}
+	.btn-pass{color: #fff; background: green;}
+	.btn-unfinish{color: #fff; background: red;}
+    .btn-detail:hover, .btn-detail:focus, .btn-detail:active, .btn-detail.active { color: #fff; background: #FA8F46; }
+    .btn-pass:hover, .btn-pass:focus, .btn-pass:active, .btn-pass.active { color: #000; background: lightgreen; }
+    .btn-detail:focus, .btn-detail:active:focus, .btn-detail.active:focus,
+    .btn-pass:focus, .btn-pass:active:focus, .btn-pass.active:focus { outline: 0 none; }
+
+	#dt_joblist thead th, #dt_loadlist thead th, #dt_install thead th{ display: none; }
+	#dt_joblist thead tr, #dt_loadlist thead tr, #dt_install thead tr, #dt_joblist tbody tr, #dt_loadlist tbody tr, #dt_install tbody tr{
+		border-bottom: 3px solid #a2a78b;
+		border-top: 3px solid #a2a78b;
+	}
+
+	/*JOB LOADLIST TABLE *
+	#dt_joblist tbody td, #dt_loadlist tbody td, #dt_install tbody td{
+        display: block;
+		position: relative;
+        margin: 0px;
+
+		line-height: 20px;
+        font-size: 15px;
+        border-bottom: 1px solid #a2a78b;
+        border-right: 3px solid #a2a78b;
+        padding-left: 120px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+	#dt_joblist tbody td:before ,#dt_loadlist tbody td:before,#dt_install tbody td:before{
+        top: 0px;
+		left: 0px;
+		width: 100px;
+        height: 100%;
+		padding-right: 10px;
+        display: block;
+        content: attr(data-content);
+        background:#a2a78b;
+		border-bottom: 1px solid #fff;
+        color:#fff;
+        text-transform:uppercase;
+        font-weight:bold;
+        font-size: 15px;
+        line-height:2em;
+        position: absolute;
+        padding:0px 10px;
+    }
+
+	.dt_zfeed thead{
+		background-color: #a2a78b;
+		color: #fff;
+	}
+	.dt_zfeed thead th{
+		border-left: solid 1px #fff;
+	}
+	.dt_zfeed tbody td{
+		border-left: solid 1px #a2a78b;
+	}
+	#dt_detaillist tbody td{
+		border: solid 1px #a2a78b;
+	}
+	.dt_zfeed, #dt_detaillist{
+		border: solid 1px #a2a78b;
+	}
+	/*-------------------------------------------------*
+	.dt_zfeed thead th:nth-child(1), .dt_zfeed tbody td:nth-child(1){ width:3px; }
+    .dt_zfeed tbody td:nth-child(1){ text-align:center; }
+	.dt_zfeed thead th:nth-child(2), .dt_zfeed tbody td:nth-child(2){ width:5px; }
+    .dt_zfeed tbody td:nth-child(2){ text-align:center; }
+	/*-------------------------------------------------*
+	#dt_detaillist tbody td:nth-child(1){
+		text-align:center;
+		background-color: #a2a78b;
+		color: #fff;
+		border-bottom: 1px solid #fff;
+		text-align: right;
+		width: 150px;
+	}
+    #tbl_main{
+        width: 100%;
+        height: 100%;
+    }
+    #tbl_sp_header{
+        width: 100%;
+        _border-bottom: solid 2px #008080;
+        border-bottom: solid 2px #fa8f46;
+    }
+    #tbl_sp_header tr{
+        width: 100%;
+    }
+    .sp_hd_judul{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+	.sp_hd_isi{
+        font-size: 50px;
+        text-align: center;
+        padding-right: 7px;
+        color: #01395e;
+        font-weight: bold;
+        width: 25%;
+    }
+	.sp_hd_judul_ins{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 15%;
+    }
+	.sp_hd_isi_ins{
+        font-size: 40px;
+        text-align: center;
+        padding-right: 7px;
+        color: #01395e;
+        font-weight: bold;
+        width: 150%;
+    }
+    .sp_hd_isi_row{
+        text-align: center;
+        padding-right: 10px;
+        color: #01395e;
+        font-weight: bold;
+        width: 20%;
+    }
+    .sp_hd_isi_row>input{
+        width: 80%;
+    }
+	#slct_row, .slct_row{
+		font-size: 30px;
+		height: 50px;
+	}
+    #tbl_sp_main{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #tbl_sp_main tr{
+       width: 100%;
+    }
+    .sp_judul_atas{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+    }
+    .sp_judul{
+        font-size: 25px;
+        font-weight: bold;
+		color: #008080;
+    }
+    .sp_isi_partname{
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        height: 80px;
+		width: 49%;
+		color: #01395e;
+		padding: 40px;
+		background-color: #fff;
+		border-radius: 30px;
+    }
+   .sp_isi{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+    }
+	.sp_isi_reel{
+        font-size: 30px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		padding: 5px;
+    }
+	.sp_isi_chk{
+        font-size: 33px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 100px;
+    }
+    .sp_footer{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+	/*------------------*
+	.sp_judul_atas_addrs{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 20%;
+    }
+    .sp_isi_addrs{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 20%;
+    }
+	.sp_judul_atas_feeder{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 50%;
+    }
+    .sp_isi_feeder{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 50%;
+    }
+	.sp_judul_atas_pos{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+		color: #008080;
+		width: 5%;
+    }
+    .sp_isi_pos{
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #01395e;
+		width: 5%;
+    }
+	.sp_judul_atas_blank{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+		color: #008080;
+		width: 25%;
+    }
+    .sp_isi_blank{
+        font-size: 40px;
+        text-align: left;
+        font-weight: bold;
+        color: #01395e;
+		width: 25%;
+    }
+	.sp_judul_atas_blank_ins{
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+		color: #008080;
+		width: 10%;
+    }
+    .sp_isi_blank_ins{
+        font-size: 40px;
+        text-align: left;
+        font-weight: bold;
+        color: #01395e;
+		width: 10%;
+    }
+	/*------------------*
+    #ket{
+        width: 100%;
+    }
+    .btn-previous, .btn-partlist, .btn-next, .btn-back{
+        width: 24%;
+        border: none;
+        background-color: #008080;
+        height: 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #fff;
+        font-size: 20px;
+    }
+    .btn-previous:hover, .btn-partlist:hover, .btn-next:hover, .btn-back:hover{
+        color: #fff;
+        background: #FA8F46;
+        font-size: 20px;
+    }
+    .spc{
+        height: 0px;
+    }
+    #judul_atas{
+        border-bottom: 2px solid #fa8f46;
+    }
+    /***
+	tr[#dt_smpdesk]:hover, tr[#dt_installdesk]:hover, tr[#dt_checkeddesk]:hover{ background: #FA8F46; font-size: 14px; }
+    #dt_smpdesk,#dt_installdesk,#dt_checkeddesk{ background-color:#fff; }
+    #dt_smpdesk thead, #dt_installdesk thead, #dt_checkeddesk thead{
+		background-color: #a2a78b; /*#AF754D*
+        display: block;
+		border-left: 2px solid #a2a78b; /*#AF754D*
+		border-right: 2px solid #a2a78b; /*#AF754D*
+    }
+	#dt_smpdesk tbody, #dt_installdesk tbody, #dt_checkeddesk tbody{
+        display: block;
+        overflow-y: scroll;
+        max-height: 750px;
+        position: static;
+		border-left: 2px solid #a2a78b; /*#AF754D*
+		border-right: 2px solid #a2a78b; /*#AF754D*
+		border-bottom: 2px solid #a2a78b; /*#AF754D*
+
+    }
+	#dt_smpdesk thead th, #dt_installdesk thead th, #dt_checkeddesk thead th{
+        vertical-align: top;
+        padding: 8px 8px;
+        text-align: center;
+        text-transform: uppercase;
+		font-size: 15px;
+		color: #fff;
+    }
+    #dt_smpdesk tbody td, #dt_installdesk tbody td, #dt_checkeddesk tbody td{
+        vertical-align: middle;
+        padding:4px 4px;
+        white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 *
+        white-space: -webkit-pre-wrap; /*Chrome & Safari  *
+        white-space: -pre-wrap;      /* Opera 4-6 *
+        white-space: pre-wrap;       /* css-3 *
+        word-wrap: break-word;       /* Internet Explorer 5.5+ *
+        white-space: normal;
+        font-size: 15px;
+        cursor: pointer;
+		height: 40px;
+    }
+	#dt_smpdesk tbody tr:hover, #dt_installdesk tbody tr:hover, #dt_checkeddesk tbody tr:hover{
+        background-color: rgba(0, 179, 179, 0.3);
+        color: #01395e;
+        font-weight: bold;
+    }
+	#dt_smpdesk thead th + th, #dt_installdesk thead th + th , #dt_checkeddesk thead th + th { border-left:1px solid #fff; /*#AF754D* }
+    #dt_smpdesk tbody td + td, #dt_installdesk tbody td + td, #dt_checkeddesk tbody td + td { border-left:1px solid #a2a78b; /*#AF754D* }
+    /*NO*
+    #dt_smpdesk th:nth-child(1), #dt_smpdesk td:nth-child(1){ min-width:40px; }
+    #dt_smpdesk td:nth-child(1){ text-align:center; }
+    /*ADDRS*
+    #dt_smpdesk th:nth-child(2), #dt_smpdesk td:nth-child(2){ min-width:70px; }
+    #dt_smpdesk td:nth-child(2){ text-align:center; }
+    /*ZFEEDER*
+    #dt_smpdesk th:nth-child(3), #dt_smpdesk td:nth-child(3) { min-width:150px; }
+    #dt_smpdesk td:nth-child(3){ text-align:left; }
+    /*POS*
+    #dt_smpdesk th:nth-child(4), #dt_smpdesk td:nth-child(4) { min-width:50px; }
+    #dt_smpdesk td:nth-child(4){ text-align:center; }
+    /*PARTNUMBER*
+    #dt_smpdesk th:nth-child(5), #dt_smpdesk td:nth-child(5){ min-width:140px; }
+    #dt_smpdesk td:nth-child(5){ text-align:right; }
+    /*DEMAND*
+    #dt_smpdesk th:nth-child(6), #dt_smpdesk td:nth-child(6){ min-width:80px; }
+    #dt_smpdesk td:nth-child(6){ text-align:right; }
+    /*LOOSERREEL*
+    #dt_smpdesk th:nth-child(7), #dt_smpdesk td:nth-child(7){ min-width:70px; }
+    #dt_smpdesk td:nth-child(7){ text-align:center; }
+    /*FULLRREEL*
+    #dt_smpdesk th:nth-child(8), #dt_smpdesk td:nth-child(8){ min-width:70px; }
+    #dt_smpdesk td:nth-child(8){ text-align:center; }
+    /*KET*
+    #dt_smpdesk th:nth-child(9){ width:100%; text-align:center; }
+    #dt_smpdesk td:nth-child(9){ width:100%; text-align:left; }
+
+	/**INSTALL**/
+	/*NO*
+    #dt_installdesk th:nth-child(1), #dt_installdesk td:nth-child(1){ min-width:40px; }
+    #dt_installdesk td:nth-child(1){ text-align:center; }
+    /*ZFEEDER*
+    #dt_installdesk th:nth-child(2), #dt_installdesk td:nth-child(2){ min-width:160px; }
+    #dt_installdesk td:nth-child(2){ text-align:center; }
+    /*POL*
+    #dt_installdesk th:nth-child(3), #dt_installdesk td:nth-child(3) { min-width:50px; }
+    #dt_installdesk td:nth-child(3){ text-align:left; }
+    /*POS*
+    #dt_installdesk th:nth-child(4), #dt_installdesk td:nth-child(4) { min-width:50px; }
+    #dt_installdesk td:nth-child(4){ text-align:center; }
+    /*WFS*
+    #dt_installdesk th:nth-child(5), #dt_installdesk td:nth-child(5){ min-width:70px; }
+    #dt_installdesk td:nth-child(5){ text-align:right; }
+    /*PSP*
+    #dt_installdesk th:nth-child(6), #dt_installdesk td:nth-child(6){ min-width:70px; }
+    #dt_installdesk td:nth-child(6){ text-align:right; }
+    /*PARTNUMBER*
+    #dt_installdesk th:nth-child(7), #dt_installdesk td:nth-child(7){ min-width:160px; }
+    #dt_installdesk td:nth-child(7){ text-align:center; }
+	/*DEMAND*
+    #dt_installdesk th:nth-child(8), #dt_installdesk td:nth-child(8){ min-width:80px; }
+    #dt_installdesk td:nth-child(8){ text-align:center; }
+	/*INSTALL*
+    #dt_installdesk th:nth-child(9), #dt_installdesk td:nth-child(9){ min-width:100px; }
+    #dt_installdesk td:nth-child(9){ text-align:center; }
+	/*KET*
+    #dt_installdesk th:nth-child(10){ min-width:100px; text-align:center; }
+    #dt_installdesk td:nth-child(10){ min-width:100px; text-align:left; }
+
+
+	/**checked**/
+	/*NO*
+    #dt_checkeddesk th:nth-child(1), #dt_checkeddesk td:nth-child(1){ min-width:40px; }
+    #dt_checkeddesk td:nth-child(1){ text-align:center; }
+    /*ZFEEDER*
+    #dt_checkeddesk th:nth-child(2), #dt_checkeddesk td:nth-child(2){ min-width:160px; }
+    #dt_checkeddesk td:nth-child(2){ text-align:center; }
+    /*POL*
+    #dt_checkeddesk th:nth-child(3), #dt_checkeddesk td:nth-child(3) { min-width:50px; }
+    #dt_checkeddesk td:nth-child(3){ text-align:left; }
+    /*POS*
+    #dt_checkeddesk th:nth-child(4), #dt_checkeddesk td:nth-child(4) { min-width:50px; }
+    #dt_checkeddesk td:nth-child(4){ text-align:center; }
+    /*WFS*
+    #dt_checkeddesk th:nth-child(5), #dt_checkeddesk td:nth-child(5){ min-width:70px; }
+    #dt_checkeddesk td:nth-child(5){ text-align:right; }
+    /*PSP*
+    #dt_checkeddesk th:nth-child(6), #dt_checkeddesk td:nth-child(6){ min-width:70px; }
+    #dt_checkeddesk td:nth-child(6){ text-align:right; }
+    /*PARTNUMBER*
+    #dt_checkeddesk th:nth-child(7), #dt_checkeddesk td:nth-child(7){ min-width:160px; }
+    #dt_checkeddesk td:nth-child(7){ text-align:center; }
+	/*DEMAND*
+    #dt_checkeddesk th:nth-child(8), #dt_checkeddesk td:nth-child(8){ min-width:80px; }
+    #dt_checkeddesk td:nth-child(8){ text-align:center; }
+	/*INSTALL*
+    #dt_checkeddesk th:nth-child(9), #dt_checkeddesk td:nth-child(9){ min-width:100px; }
+    #dt_checkeddesk td:nth-child(9){ text-align:center; }
+	/*KET*
+    #dt_checkeddesk th:nth-child(10){ min-width:100px; text-align:center; }
+    #dt_checkeddesk td:nth-child(10){ min-width:100px; text-align:left; }
+}
+*/
