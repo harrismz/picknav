@@ -1,6 +1,8 @@
 <?php
 	date_default_timezone_set('Asia/Jakarta');
 	include "../adodb/con_part_im.php";
+	include "../adodb/con_smtprosLED.php";
+	include "../adodb/con_criticalpart.php";
 	
     echo 'DATE !! '.$date    = date("Y-m-d");
     echo 'TIME !! '.$time    = date('H:i:s');

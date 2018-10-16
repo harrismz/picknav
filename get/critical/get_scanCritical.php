@@ -95,11 +95,9 @@ else{
 			<source src ="asset/sound/Critical_Tidak_Ada.mp3" type="audio/mp3"></audio>';
 	}
 	else{
-		echo'
-			<h4 class="warning" align="center" style="color: red; font-size: 70px;">CRITICAL NG ( EXPIRED )</h4>
+		echo'<h4 class="warning" align="center" style="color: red; font-size: 70px;">CRITICAL NG ( EXPIRED )</h4>
 			<audio controls autoplay hidden="hidden">
-			<source src ="asset/sound/EXPIRED.mp3" type="audio/mp3"></audio>
-		';
+			<source src ="asset/sound/EXPIRED.mp3" type="audio/mp3"></audio>';
 	}
 	
 						
