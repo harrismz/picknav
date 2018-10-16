@@ -58,131 +58,62 @@
 			$pos2 	   = trim($rs2->fields[2]);
 			$rs2->Close();
 		
-		if($exist2 != 0){
-			$pos = "";
-			if (empty($pos2)){
-				$pos = "pos = '{$pos2}' or pos is null";
-			}
-			else{
-				$pos = "pos = '{$pos2}'";
-			}
-			//CK73HBB1A104K 910000195842410X
-			//CK73HBB1E103K 9 7000195842410X
-			//RK73HB1J103J  910000195842410X
-			//RK73HB1J103J  9
-			$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
-							install_date = '{$date}', install_time = '{$time}'
-							where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
-							and partnumber = '{$partnumber}' and ($pos);";
-			$rs_upd_ins2 = $db->Execute($sql_upd_ins2);
-			$rs_upd_ins2->Close();
+		//	check LED
+			$sql_checkLED 	= "select count(partno) from [SMTPROS].[dbo].[tblLEDRankPart] where LTRIM(RTRIM(partno)) = '{$get_partnumber}'";
+			$rs_LED			= $db_smtpros->Execute($sql_checkLED);
+			$exist_LED		= $rs_LED->RecordCount();
+			$rs_LED->Close();
 			
-			$sql_checkscan1 = "Select count(*) from installscan 
-								where jobno = '{$jobno}' 
-								and jobdate = '{$jdate}' 
-								and partno containing '{$partnumber}'";
-			$rs_checkscan1 = $db->Execute($sql_checkscan1);
-			$check1 = $rs_checkscan1->fields[0];
-			$rs_checkscan1->Close();
-						
-			$sql_checkscan = "Select count(*) from installscan 
-								where jobno = '{$jobno}' 
-								and jobdate = '{$jdate}' 
-								and partno = '{$partnumber2}'";
-			$rs_checkscan = $db->Execute($sql_checkscan);
-			$check = $rs_checkscan->fields[0];
-			$rs_checkscan->Close();
-					
-			if($check1==0 && $check == 0){
-				$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
-								values ('{$jobno}','{$zfeeder11}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','1','{$jdate}')";
-				$rs_insscan = $db->Execute($sql_insscan);
-				$rs_insscan->Close();
-			}
-			elseif($check1==0 && $check != 0){
-				$sql_insscan = "UPDATE INSTALLSCAN SET 
-													zfeeder = '{$zfeeder11}',
-													scannik = '{$picknav_nik}', 
-													scandate = '{$date}', 
-													scantime = '{$time}'
-												where jobno = '{$jobno}' 
-													and jobdate = '{$jdate}' 
-													and partno = '{$partnumber2}'";
-				$rs_insscan = $db->Execute($sql_insscan);
-				$rs_insscan->Close();
-			}
-			elseif($check1!=0 && $check == 0){
-				$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
-								values ('{$jobno}','{$zfeeder11}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','2','{$jdate}')";
-				$rs_insscan = $db->Execute($sql_insscan);
-				$rs_insscan->Close();
-			}
-			elseif($check1!=0 && $check != 0){
-				$sql_insscan = "UPDATE INSTALLSCAN SET 
-													zfeeder = '{$zfeeder11}',
-													scannik = '{$picknav_nik}', 
-													scandate = '{$date}', 
-													scantime = '{$time}'
-												where jobno = '{$jobno}' 
-													and jobdate = '{$jdate}' 
-													and partno = '{$partnumber2}'";
-				$rs_insscan = $db->Execute($sql_insscan);
-				$rs_insscan->Close();
-			}
-		}
-		else{
-			$sql 		= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
-							install, ket, zfd_name, zfd_no, zfd_tray, install_date, install_time
-						from pn_install('{$jobno}')
-						where zfeeder containing '{$zfeeder}' and partnumber = '{$partnumber}'
-						order by zfd_name,zfd_no,install_date,install_time asc";
-			$rs		  = $db->Execute($sql);
-			$exist	  = $rs->RecordCount();
-			$zfeeder3 = $rs->fields[0];
-			$pos3 	   = trim($rs->fields[2]);
-			$rs->Close();
-			
-			if($exist != 0){
+			$sql_checkLEDScan 	= "select count(barcode) from [SMTPROS].[dbo].[tblLEDRankScan] where LTRIM(RTRIM(barcode)) = '{$get_partnumber3}'";
+			$rs_LEDScan			= $db_smtpros->Execute($sql_checkLEDScan);
+			$exist_LEDScan		= $rs_LEDScan->RecordCount();
+			$rs_LEDScan->Close();
+		
+		if(($exist_LED == 0 and $exist_LEDScan == 0){
+			if($exist2 != 0){
 				$pos = "";
-				if (empty($pos3)){
-					$pos = "pos = '{$pos3}' or pos is null";
+				if (empty($pos2)){
+					$pos = "pos = '{$pos2}' or pos is null";
 				}
 				else{
-					$pos = "pos = '{$pos3}'";
+					$pos = "pos = '{$pos2}'";
 				}
-				$sql_upd_ins= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+				//CK73HBB1A104K 910000195842410X
+				//CK73HBB1E103K 9 7000195842410X
+				//RK73HB1J103J  910000195842410X
+				//RK73HB1J103J  9
+				$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
 								install_date = '{$date}', install_time = '{$time}'
-								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder3}'
+								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
 								and partnumber = '{$partnumber}' and ($pos);";
-				$rs_upd_ins = $db->Execute($sql_upd_ins);
-				$rs_upd_ins->Close();
+				$rs_upd_ins2 = $db->Execute($sql_upd_ins2);
+				$rs_upd_ins2->Close();
 				
-
 				$sql_checkscan1 = "Select count(*) from installscan 
-											where jobno = '{$jobno}' 
-											and jobdate = '{$jdate}' 
-											and partno containing '{$partnumber}'";
-						$rs_checkscan1 = $db->Execute($sql_checkscan1);
-						$check1 = $rs_checkscan1->fields[0];
-						$rs_checkscan1->Close();
-						
-						$sql_checkscan = "Select count(*) from installscan 
-											where jobno = '{$jobno}' 
-											and jobdate = '{$jdate}' 
-											and partno = '{$partnumber2}'";
-						$rs_checkscan = $db->Execute($sql_checkscan);
-						$check = $rs_checkscan->fields[0];
-						$rs_checkscan->Close();
+									where jobno = '{$jobno}' 
+									and jobdate = '{$jdate}' 
+									and partno containing '{$partnumber}'";
+				$rs_checkscan1 = $db->Execute($sql_checkscan1);
+				$check1 = $rs_checkscan1->fields[0];
+				$rs_checkscan1->Close();
+							
+				$sql_checkscan = "Select count(*) from installscan 
+									where jobno = '{$jobno}' 
+									and jobdate = '{$jdate}' 
+									and partno = '{$partnumber2}'";
+				$rs_checkscan = $db->Execute($sql_checkscan);
+				$check = $rs_checkscan->fields[0];
+				$rs_checkscan->Close();
 						
 				if($check1==0 && $check == 0){
 					$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
-									values ('{$jobno}','{$zfeeder3}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','1','{$jdate}')";
+									values ('{$jobno}','{$zfeeder11}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','1','{$jdate}')";
 					$rs_insscan = $db->Execute($sql_insscan);
 					$rs_insscan->Close();
 				}
 				elseif($check1==0 && $check != 0){
 					$sql_insscan = "UPDATE INSTALLSCAN SET 
-														zfeeder = '{$zfeeder3}',
+														zfeeder = '{$zfeeder11}',
 														scannik = '{$picknav_nik}', 
 														scandate = '{$date}', 
 														scantime = '{$time}'
@@ -194,13 +125,13 @@
 				}
 				elseif($check1!=0 && $check == 0){
 					$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
-									values ('{$jobno}','{$zfeeder3}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','2','{$jdate}')";
+									values ('{$jobno}','{$zfeeder11}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','2','{$jdate}')";
 					$rs_insscan = $db->Execute($sql_insscan);
 					$rs_insscan->Close();
 				}
 				elseif($check1!=0 && $check != 0){
 					$sql_insscan = "UPDATE INSTALLSCAN SET 
-														zfeeder = '{$zfeeder3}',
+														zfeeder = '{$zfeeder11}',
 														scannik = '{$picknav_nik}', 
 														scandate = '{$date}', 
 														scantime = '{$time}'
@@ -211,7 +142,249 @@
 					$rs_insscan->Close();
 				}
 			}
+			else{
+				$sql 		= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
+								install, ket, zfd_name, zfd_no, zfd_tray, install_date, install_time
+							from pn_install('{$jobno}')
+							where zfeeder containing '{$zfeeder}' and partnumber = '{$partnumber}'
+							order by zfd_name,zfd_no,install_date,install_time asc";
+				$rs		  = $db->Execute($sql);
+				$exist	  = $rs->RecordCount();
+				$zfeeder3 = $rs->fields[0];
+				$pos3 	   = trim($rs->fields[2]);
+				$rs->Close();
+				
+				if($exist != 0){
+					$pos = "";
+					if (empty($pos3)){
+						$pos = "pos = '{$pos3}' or pos is null";
+					}
+					else{
+						$pos = "pos = '{$pos3}'";
+					}
+					$sql_upd_ins= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+									install_date = '{$date}', install_time = '{$time}'
+									where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder3}'
+									and partnumber = '{$partnumber}' and ($pos);";
+					$rs_upd_ins = $db->Execute($sql_upd_ins);
+					$rs_upd_ins->Close();
+					
+
+					$sql_checkscan1 = "Select count(*) from installscan 
+												where jobno = '{$jobno}' 
+												and jobdate = '{$jdate}' 
+												and partno containing '{$partnumber}'";
+							$rs_checkscan1 = $db->Execute($sql_checkscan1);
+							$check1 = $rs_checkscan1->fields[0];
+							$rs_checkscan1->Close();
+							
+							$sql_checkscan = "Select count(*) from installscan 
+												where jobno = '{$jobno}' 
+												and jobdate = '{$jdate}' 
+												and partno = '{$partnumber2}'";
+							$rs_checkscan = $db->Execute($sql_checkscan);
+							$check = $rs_checkscan->fields[0];
+							$rs_checkscan->Close();
+							
+					if($check1==0 && $check == 0){
+						$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
+										values ('{$jobno}','{$zfeeder3}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','1','{$jdate}')";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+					elseif($check1==0 && $check != 0){
+						$sql_insscan = "UPDATE INSTALLSCAN SET 
+															zfeeder = '{$zfeeder3}',
+															scannik = '{$picknav_nik}', 
+															scandate = '{$date}', 
+															scantime = '{$time}'
+														where jobno = '{$jobno}' 
+															and jobdate = '{$jdate}' 
+															and partno = '{$partnumber2}'";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+					elseif($check1!=0 && $check == 0){
+						$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
+										values ('{$jobno}','{$zfeeder3}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','2','{$jdate}')";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+					elseif($check1!=0 && $check != 0){
+						$sql_insscan = "UPDATE INSTALLSCAN SET 
+															zfeeder = '{$zfeeder3}',
+															scannik = '{$picknav_nik}', 
+															scandate = '{$date}', 
+															scantime = '{$time}'
+														where jobno = '{$jobno}' 
+															and jobdate = '{$jdate}' 
+															and partno = '{$partnumber2}'";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+				}
+			}
 		}
+		elseif($exist_LED >= 1 and $exist_LEDScan == 0){
+			
+		}
+		elseif($exist_LED >= 1 and $exist_LEDScan >= 1){
+			if($exist2 != 0){
+				$pos = "";
+				if (empty($pos2)){
+					$pos = "pos = '{$pos2}' or pos is null";
+				}
+				else{
+					$pos = "pos = '{$pos2}'";
+				}
+				//CK73HBB1A104K 910000195842410X
+				//CK73HBB1E103K 9 7000195842410X
+				//RK73HB1J103J  910000195842410X
+				//RK73HB1J103J  9
+				$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+								install_date = '{$date}', install_time = '{$time}'
+								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
+								and partnumber = '{$partnumber}' and ($pos);";
+				$rs_upd_ins2 = $db->Execute($sql_upd_ins2);
+				$rs_upd_ins2->Close();
+				
+				$sql_checkscan1 = "Select count(*) from installscan 
+									where jobno = '{$jobno}' 
+									and jobdate = '{$jdate}' 
+									and partno containing '{$partnumber}'";
+				$rs_checkscan1 = $db->Execute($sql_checkscan1);
+				$check1 = $rs_checkscan1->fields[0];
+				$rs_checkscan1->Close();
+							
+				$sql_checkscan = "Select count(*) from installscan 
+									where jobno = '{$jobno}' 
+									and jobdate = '{$jdate}' 
+									and partno = '{$partnumber2}'";
+				$rs_checkscan = $db->Execute($sql_checkscan);
+				$check = $rs_checkscan->fields[0];
+				$rs_checkscan->Close();
+						
+				if($check1==0 && $check == 0){
+					$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
+									values ('{$jobno}','{$zfeeder11}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','1','{$jdate}')";
+					$rs_insscan = $db->Execute($sql_insscan);
+					$rs_insscan->Close();
+				}
+				elseif($check1==0 && $check != 0){
+					$sql_insscan = "UPDATE INSTALLSCAN SET 
+														zfeeder = '{$zfeeder11}',
+														scannik = '{$picknav_nik}', 
+														scandate = '{$date}', 
+														scantime = '{$time}'
+													where jobno = '{$jobno}' 
+														and jobdate = '{$jdate}' 
+														and partno = '{$partnumber2}'";
+					$rs_insscan = $db->Execute($sql_insscan);
+					$rs_insscan->Close();
+				}
+				elseif($check1!=0 && $check == 0){
+					$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
+									values ('{$jobno}','{$zfeeder11}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','2','{$jdate}')";
+					$rs_insscan = $db->Execute($sql_insscan);
+					$rs_insscan->Close();
+				}
+				elseif($check1!=0 && $check != 0){
+					$sql_insscan = "UPDATE INSTALLSCAN SET 
+														zfeeder = '{$zfeeder11}',
+														scannik = '{$picknav_nik}', 
+														scandate = '{$date}', 
+														scantime = '{$time}'
+													where jobno = '{$jobno}' 
+														and jobdate = '{$jdate}' 
+														and partno = '{$partnumber2}'";
+					$rs_insscan = $db->Execute($sql_insscan);
+					$rs_insscan->Close();
+				}
+			}
+			else{
+				$sql 		= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
+								install, ket, zfd_name, zfd_no, zfd_tray, install_date, install_time
+							from pn_install('{$jobno}')
+							where zfeeder containing '{$zfeeder}' and partnumber = '{$partnumber}'
+							order by zfd_name,zfd_no,install_date,install_time asc";
+				$rs		  = $db->Execute($sql);
+				$exist	  = $rs->RecordCount();
+				$zfeeder3 = $rs->fields[0];
+				$pos3 	   = trim($rs->fields[2]);
+				$rs->Close();
+				
+				if($exist != 0){
+					$pos = "";
+					if (empty($pos3)){
+						$pos = "pos = '{$pos3}' or pos is null";
+					}
+					else{
+						$pos = "pos = '{$pos3}'";
+					}
+					$sql_upd_ins= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+									install_date = '{$date}', install_time = '{$time}'
+									where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder3}'
+									and partnumber = '{$partnumber}' and ($pos);";
+					$rs_upd_ins = $db->Execute($sql_upd_ins);
+					$rs_upd_ins->Close();
+					
+
+					$sql_checkscan1 = "Select count(*) from installscan 
+												where jobno = '{$jobno}' 
+												and jobdate = '{$jdate}' 
+												and partno containing '{$partnumber}'";
+							$rs_checkscan1 = $db->Execute($sql_checkscan1);
+							$check1 = $rs_checkscan1->fields[0];
+							$rs_checkscan1->Close();
+							
+							$sql_checkscan = "Select count(*) from installscan 
+												where jobno = '{$jobno}' 
+												and jobdate = '{$jdate}' 
+												and partno = '{$partnumber2}'";
+							$rs_checkscan = $db->Execute($sql_checkscan);
+							$check = $rs_checkscan->fields[0];
+							$rs_checkscan->Close();
+							
+					if($check1==0 && $check == 0){
+						$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
+										values ('{$jobno}','{$zfeeder3}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','1','{$jdate}')";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+					elseif($check1==0 && $check != 0){
+						$sql_insscan = "UPDATE INSTALLSCAN SET 
+															zfeeder = '{$zfeeder3}',
+															scannik = '{$picknav_nik}', 
+															scandate = '{$date}', 
+															scantime = '{$time}'
+														where jobno = '{$jobno}' 
+															and jobdate = '{$jdate}' 
+															and partno = '{$partnumber2}'";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+					elseif($check1!=0 && $check == 0){
+						$sql_insscan = "INSERT INTO INSTALLSCAN (jobno, zfeeder, partno, scannik, scandate, scantime, status, jobdate)
+										values ('{$jobno}','{$zfeeder3}','{$partnumber2}','{$picknav_nik}','{$date}','{$time}','2','{$jdate}')";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+					elseif($check1!=0 && $check != 0){
+						$sql_insscan = "UPDATE INSTALLSCAN SET 
+															zfeeder = '{$zfeeder3}',
+															scannik = '{$picknav_nik}', 
+															scandate = '{$date}', 
+															scantime = '{$time}'
+														where jobno = '{$jobno}' 
+															and jobdate = '{$jdate}' 
+															and partno = '{$partnumber2}'";
+						$rs_insscan = $db->Execute($sql_insscan);
+						$rs_insscan->Close();
+					}
+				}
+			}
+		}
+			
 	}
 	elseif($action == 'cancelInstall'){
 		$zfeeder4	= isset($_REQUEST['zfeeder']) ? $_REQUEST['zfeeder'] : '';
