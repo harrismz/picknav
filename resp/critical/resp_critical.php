@@ -20,10 +20,6 @@
 		$jobno2      = isset($_REQUEST['jobno']) ? $_REQUEST['jobno'] : '';
 		$partnumber2 = isset($_REQUEST['partnumber']) ? $_REQUEST['partnumber'] : '';
 		$criticalid = substr($partnumber2,16,13);
-		//J7J-0520-00    +EXP1810141923+20191014+ID1810140244+BK1810140006
-		$bakingid	 = substr($partnumber2,39,12);
-		$issueid	 = substr($partnumber2,52,12);
-		
 		$partnumber1 = substr($partnumber2, 0, 15);
 		$arr = explode("(", $partnumber1, 2);
 		$partnumber = $arr[0];
@@ -67,10 +63,11 @@
 			$criticalStatus = trim($rs2->fields['0']);
 			
 			if($criticalStatus == '1' ){
-				$sql_insscan = "INSERT INTO CRITICALRECORDS (jobno, zfeeder, partno, critical_nik, critical_date, critical_time, critical_id, expdate, source, issue_id, baking_id)
-							values ('{$jobno}','{$zfeeder}','{$partnumber}','{$picknav_nik}','{$date}','{$time}','{$criticalid}','{$jdate}','INSTALL','{$bakingid}','{$issueid}')";
+				$sql_insscan = "INSERT INTO CRITICALRECORDS (jobno, zfeeder, partno, critical_nik, critical_date, critical_time, critical_id, expdate, source)
+							values ('{$jobno}','{$zfeeder}','{$partnumber}','{$picknav_nik}','{$date}','{$time}','{$criticalid}','{$jdate}','INSTALL')";
 				$rs_insscan = $db->Execute($sql_insscan);
 				$rs_insscan->Close();
+			
 			}
 	}
 	elseif($action=="saveCriticalMenu"){
@@ -84,8 +81,8 @@
 		$dd = substr($jdate2,6,2);
 		$jdate = $yyyy.'-'.$mm.'-'.$dd;
 		if($criticalStatus == '1' ){
-			$sql_insscan = "INSERT INTO CRITICALRECORDS (jobno, zfeeder, partno, critical_nik, critical_date, critical_time, critical_id, expdate, source, issue_id, baking_id)
-						values ('{$jobno}','','{$partnumber}','{$picknav_nik}','{$date}','{$time}','{$criticalid}','{$jdate}','MENU','{$bakingid}','{$issueid}')";
+			$sql_insscan = "INSERT INTO CRITICALRECORDS (jobno, zfeeder, partno, critical_nik, critical_date, critical_time, critical_id, expdate, source)
+						values ('{$jobno}','','{$partnumber}','{$picknav_nik}','{$date}','{$time}','{$criticalid}','{$jdate}','MENU')";
 			$rs_insscan = $db->Execute($sql_insscan);
 			$rs_insscan->Close();
 		}

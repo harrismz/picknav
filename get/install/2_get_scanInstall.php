@@ -6,7 +6,7 @@ ob_end_clean();
 date_default_timezone_set('Asia/Jakarta');
 
 //	database connection
-	include "../../../adodb/con_part_im.php";
+	include "../../../adodb/con_picknav.php";
 	include "../../../adodb/con_smtprosLED.php";
 	include "../../../adodb/con_criticalpart.php";
 

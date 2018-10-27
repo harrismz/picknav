@@ -1,8 +1,7 @@
 <?php
 	date_default_timezone_set('Asia/Jakarta');
-	include "../adodb/con_picknav.php";
+	include "../adodb/con_part_im.php";
 	include "../adodb/con_smtprosLED.php";
-	include "../adodb/con_criticalpart.php";
 	
     echo 'DATE !! '.$date    = date("Y-m-d");
     echo 'TIME !! '.$time    = date('H:i:s');
@@ -19,12 +18,12 @@
 	//	call post
 		$jdate2      = isset($_REQUEST['jdate']) ? $_REQUEST['jdate'] : '';
 		$jobno2      = isset($_REQUEST['jobno']) ? $_REQUEST['jobno'] : '';
-		$model	     = isset($_POST['model']) ? $_POST['model'] : '';
 		$partnumber2 = isset($_REQUEST['partnumber']) ? $_REQUEST['partnumber'] : '';
+		$model 		 = isset($_REQUEST['model']) ? $_REQUEST['model'] : '';
 		$partnumber1 = substr($partnumber2, 0, 15);
-		$arr = explode("(", @$partnumber1, 2);
-		$partnumber = @$arr[0];
-		$firmno = '('.@$arr[1];
+		$arr = explode("(", $partnumber1, 2);
+		$partnumber = @$arr['0'];
+		$firmno = '('.@$arr['1'];
 		$jdate = trim($jdate2);
 		$jobno = trim($jobno2);
 	
@@ -45,20 +44,6 @@
 	
 	if($action=="saveInstall"){
 		
-		//	***	
-		//	search zfeeder
-			$sql2 		= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
-							install, ket, zfd_name, zfd_no, zfd_tray, install_date, install_time
-						from pn_install('{$jobno}')
-						where zfeeder containing '{$zfeeder}' and partnumber = '{$partnumber}'
-						and (install = '' or install is null)
-						order by zfd_name,zfd_no,install_date,install_time asc";
-			$rs2		  = $db->Execute($sql2);
-			$exist2	  = $rs2->RecordCount();
-			$zfeeder11 = $rs2->fields[0];
-			$pos2 	   = trim($rs2->fields[2]);
-			$rs2->Close();
-		
 		//	check LED
 			$sql_checkLED 	= "select count(partno) from [SMTPROS].[dbo].[tblLEDRankPart] where LTRIM(RTRIM(partno)) = '{$partnumber1}'";
 			$rs_LED			= $db_smtpros->Execute($sql_checkLED);
@@ -69,8 +54,22 @@
 			$rs_LEDScan			= $db_smtpros->Execute($sql_checkLEDScan);
 			$exist_LEDScan		= $rs_LEDScan->fields['0'];
 			$rs_LEDScan->Close();
-		
+			
 		if($exist_LED == 0 and $exist_LEDScan == 0){
+			//	***	
+			//	search zfeeder
+				$sql2 		= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
+								install, ket, zfd_name, zfd_no, zfd_tray, install_date, install_time
+							from pn_install('{$jobno}')
+							where zfeeder containing '{$zfeeder}' and partnumber = '{$partnumber}'
+							and (install = '' or install is null)
+							order by zfd_name,zfd_no,install_date,install_time asc";
+				$rs2		  = $db->Execute($sql2);
+				$exist2	  = $rs2->RecordCount();
+				$zfeeder11 = $rs2->fields[0];
+				$pos2 	   = trim($rs2->fields[2]);
+				$rs2->Close();
+			
 			if($exist2 != 0){
 				$pos = "";
 				if (empty($pos2)){
@@ -83,7 +82,7 @@
 				//CK73HBB1E103K 9 7000195842410X
 				//RK73HB1J103J  910000195842410X
 				//RK73HB1J103J  9
-				echo $sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+				$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
 								install_date = '{$date}', install_time = '{$time}'
 								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
 								and partnumber = '{$partnumber}' and ($pos);";
@@ -225,11 +224,23 @@
 					}
 				}
 			}
-		}
-		elseif($exist_LED >= 1 and $exist_LEDScan == 0){
-			
-		}
+		}	
+		elseif($exist_LED >= 1 and $exist_LEDScan == 0){ echo 'LED BELUM DI SCAN'; }
 		elseif($exist_LED >= 1 and $exist_LEDScan >= 1){
+			//	***	
+			//	search zfeeder
+				$sql2 		= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
+								install, ket, zfd_name, zfd_no, zfd_tray, install_date, install_time
+							from pn_install('{$jobno}')
+							where zfeeder containing '{$zfeeder}' and partnumber = '{$partnumber}'
+							and (install = '' or install is null)
+							order by zfd_name,zfd_no,install_date,install_time asc";
+				$rs2		  = $db->Execute($sql2);
+				$exist2	  = $rs2->RecordCount();
+				$zfeeder11 = $rs2->fields[0];
+				$pos2 	   = trim($rs2->fields[2]);
+				$rs2->Close();
+			
 			if($exist2 != 0){
 				$pos = "";
 				if (empty($pos2)){
@@ -242,7 +253,7 @@
 				//CK73HBB1E103K 9 7000195842410X
 				//RK73HB1J103J  910000195842410X
 				//RK73HB1J103J  9
-				echo $sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+				$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
 								install_date = '{$date}', install_time = '{$time}'
 								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
 								and partnumber = '{$partnumber}' and ($pos);";
@@ -384,13 +395,7 @@
 					}
 				}
 			}
-			
-			$sql_insLED = "INSERT INTO LEDRANKRECORDS (jobno, zfeeder, partno, model, led_nik, led_date, led_time)
-						values ('{$jobno}','{$zfeeder}','{$partnumber}','{$model}','{$picknav_nik}','{$date}','{$time}')";
-			$rs_insLED = $db->Execute($sql_insLED);
-			$rs_insLED->Close();
 		}
-			
 	}
 	elseif($action == 'cancelInstall'){
 		$zfeeder4	= isset($_REQUEST['zfeeder']) ? $_REQUEST['zfeeder'] : '';
@@ -419,5 +424,4 @@
 
 $db->Close();
 $db=null;
-
 ?>

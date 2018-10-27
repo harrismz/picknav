@@ -7,7 +7,6 @@ date_default_timezone_set('Asia/Jakarta');
 
 //	database connection
 	include "../../../adodb/con_part_im.php";
-	include "../../../adodb/con_smt_critical.php";
 
 //	call session and post
 	$picknav_pic 		= isset($_SESSION['picknav_pic']) ? $_SESSION['picknav_pic'] : '';
@@ -74,36 +73,11 @@ if($exist == 0){
     ?>
         <h4 class="warning" align="center" style="color: red; font-size: 50px;">PART TIDAK ADA</h4>
 		<audio controls autoplay hidden="hidden">
-		<source src ="asset/sound/Part_Tidak_Ada.mp3" type="audio/mp3"></audio>
+		<source src ="asset/sound/PART_TIDAK_ADA.mp3" type="audio/mp3"></audio>
 						
     <?php
 }
 else{
-	$sql2 	= "Exec checkCriticalStatus '{$get_partnumber3}'";
-	$rs2	= $conn->Execute($sql2);
-	$rs2->Close();
-	$criticalStatus = trim($rs2->fields['0']);
-	
-	if($criticalStatus == '1' ){
-		echo'<h4 class="warning" align="center" style="color: green; font-size: 70px;">CRITICAL OK</h4>
-			<audio controls autoplay hidden="hidden">
-			<source src ="asset/sound/OK.mp3" type="audio/mp3"></audio>';
-	}
-	elseif($criticalStatus == '2' ){
-		echo'<h4 class="warning" align="center" style="color: green; font-size: 70px;">CRITICAL TIDAK TERDAFTAR</h4>
-			<audio controls autoplay hidden="hidden">
-			<source src ="asset/sound/Critical_Tidak_Ada.mp3" type="audio/mp3"></audio>';
-	}
-	else{
-		echo'
-			<h4 class="warning" align="center" style="color: red; font-size: 70px;">CRITICAL NG ( EXPIRED )</h4>
-			<audio controls autoplay hidden="hidden">
-			<source src ="asset/sound/EXPIRED.mp3" type="audio/mp3"></audio>
-		';
-	}
-	
-						
-	/*
 	echo'<table id="dt_scanInstall" class="table table-stripse col-xs-12 col-sm-12 col-md-12 col-lg-12">';
     echo'<thead>';
         echo'<th>Z-FEEDER</th>';
@@ -227,12 +201,9 @@ else{
     }
     echo'</tbody>';
     echo'</table>';
-	*/
 }
 
 $rs->Close();
 $db->Close();
 $db=null;
-$conn->Close();
-$conn=null;
 ?>

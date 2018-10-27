@@ -12,11 +12,11 @@ include "../../../adodb/con_part_im.php";
 <script type="text/javascript">
 	$(document).ready(function(){
         //color based on menu click
-		if(	operator == "2_install_data"){
+		if(	smt == "2_install"){
 			//remove
-			$("#dt_installdata").removeClass("partnoClick-table pickingClick-table installClick-table checkedClick-table replaceClick-table limitClick-table");
+			$("#dt_install").removeClass("partnoClick-table pickingClick-table installClick-table checkedClick-table replaceClick-table limitClick-table");
 			//add
-			$("#dt_installdata").addClass("installClick-table");
+			$("#dt_install").addClass("installClick-table");
 		}
 		return false;
     });
@@ -33,24 +33,20 @@ $src_edate_install	= isset($_POST['src_edate_install']) 	? $_POST['src_edate_ins
 $src_jobno_install	= isset($_POST['src_jobno_install']) 	? $_POST['src_jobno_install'] : '';
 
 if(empty($src_sdate_install) && empty($src_edate_install) && empty($src_jobno_install)){
-	$where = "where a.jobdate = '$date2' and (a.sts_opstart is not null
-		or jobline containing 'JAR')";
+	$where = "where a.jobdate = '$date2' and a.sts_opstart is not null";
 }
 elseif(empty($src_sdate_install) && empty($src_edate_install) && $src_jobno_install != ""){
-	$where = "where c.jobno containing '$src_jobno_install' and (a.sts_opstart is not null
-		or jobline containing 'JAR')";
+	$where = "where c.jobno like '$src_jobno_install%' and a.sts_opstart is not null";
 }
 elseif($src_sdate_install !="" && $src_edate_install !="" && empty($src_jobno_install)){
-	$where = "where a.jobdate>='$src_sdate_install' and  a.jobdate<='$src_edate_install' and (a.sts_opstart is not null
-		or jobline containing 'JAR')";
+	$where = "where a.jobdate>='$src_sdate_install' and  a.jobdate<='$src_edate_install' and a.sts_opstart is not null";
 }
 else{
-	$where = "where a.jobdate>='$src_sdate_install' and  a.jobdate<='$src_edate_install' and c.jobno containing '$src_jobno_install' and (a.sts_opstart is not null
-		or jobline containing 'JAR')";
+	$where = "where a.jobdate>='$src_sdate_install' and  a.jobdate<='$src_edate_install' and c.jobno like '$src_jobno_install%' and a.sts_opstart is not null";
 }
 	
 	$sql 		= "select distinct c.jobno,a.jobdate,a.jobtime,a.jobline,a.jobmodelname,b.pwb_name,a.jobpwbno,b.process,
-                    a.jobstartserial,a.joblotsize, a.jobfile, c.picname, a.op_name, a.sts_opstart, a.sts_install, sts_ins_sname, sts_ins_ename
+                    a.jobstartserial,a.joblotsize,c.picname, a.op_name, a.sts_opstart, a.sts_install, sts_ins_sname, sts_ins_ename
                      from jobheaderinfo a
                       left join jobmodel b on a.jobno=b.jobno
                        left join joblist c on a.jobno=c.jobno
@@ -61,7 +57,7 @@ else{
 	
 	if($exist == 0){ ?> <h4 class="warning" align="center" style="color: red;">No Install Data</h4> <?php }
 	else{
-		echo'<table id="dt_installdata" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';
+		echo'<table id="dt_install" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">';
 		echo'<thead>';
 			echo'<tr>';
 				echo'<th rowspan="2">NO</th>';
@@ -70,13 +66,12 @@ else{
 				echo'<th rowspan="2">DATE</th>';
 				echo'<th rowspan="2">LINE</th>';
 				echo'<th rowspan="2">MODEL NAME</th>';
-				echo'<th rowspan="2">PROCESS</th>';
+				echo'<th rowspan="2">PWB NAME</th>';
 				echo'<th rowspan="2">PWB NO.</th>';
-				echo'<th rowspan="2"hidden="true">PROCESS</th>';
+				echo'<th rowspan="2">PROCESS</th>';
 				echo'<th rowspan="2">START SERIAL</th>';
 				echo'<th rowspan="2">LOT SIZE</th>';
-				echo'<th rowspan="2">FILE</th>';
-			echo'<th colspan="3">PIC NAME</th>';
+				echo'<th colspan="3">PIC NAME</th>';
 			echo'</tr>';
 			echo'<tr>';
 				echo'<th class="th2-1">PIC</th>';
@@ -99,26 +94,17 @@ else{
 			$process       = trim($rs->fields['7']);
 			$jobstartserial= trim($rs->fields['8']);
 			$joblotsize    = trim($rs->fields['9']);
-			$jobfile	   = trim($rs->fields['10']);
-			$picname       = trim($rs->fields['11']);
-			$opname1	   = trim($rs->fields['12']);	
-			$sts_opstart   = trim($rs->fields['13']);
-			$sts_install   = trim($rs->fields['14']);
-			$sts_sname	   = trim($rs->fields['15']);
-			$sts_ename     = trim($rs->fields['16']);
+			$picname       = trim($rs->fields['10']);
+			$opname1	   = trim($rs->fields['11']);	
+			$sts_opstart   = trim($rs->fields['12']);
+			$sts_install   = trim($rs->fields['13']);
+			$sts_sname	   = trim($rs->fields['14']);
+			$sts_ename     = trim($rs->fields['15']);
             $jdate         = trim($rs->fields['1']);
 			
 			if($opname1 == ""){$opname = '<font style="color: red">NO DATA</font>';}
 			else{$opname = $opname1;}
-            
-			$pwb_name1 = trim($pwb_name);
-			if(empty($pwb_name1)){
-				$pwb_name = $process;
-			}
-			else{
-				$pwb_name = $pwb_name1.' / '.$process;
-			}
-			
+                        
             if($sts_install === "1" or $sts_install === "5"){ echo'<tr style="background-color:yellow !important">'; }
 			elseif($sts_install === "2"){ echo'<tr style="background-color:lightgreen !important">'; }
 			elseif($sts_install === "4"){ echo'<tr style="background-color:lightblue !important">'; }
@@ -141,12 +127,11 @@ else{
 				echo'<td data-content="DATE">'.$jobdate.' ('.$jobtime.')</td>';
 				echo'<td data-content="LINE">'.$jobline.'</td>';
 				echo'<td data-content="MODEL NAME">'.$jobmodelname.'</td>';
-				echo'<td data-content="PROCESS">'.$pwb_name.'</td>';
+				echo'<td data-content="PWB NAME">'.$pwb_name.'</td>';
 				echo'<td data-content="PWB NO.">'.$jobpwbno.'</td>';
-				echo'<td data-content="PROCESS" hidden="true" >'.$process.'</td>';
+				echo'<td data-content="PROCESS">'.$process.'</td>';
 				echo'<td data-content="START SERIAL">'.$jobstartserial.'</td>';
 				echo'<td data-content="LOT SIZE">'.$joblotsize.'</td>';
-				echo'<td data-content="FILE">'.$jobfile.'</td>';
 				echo'<td data-content="PIC">'.$picname.'</td>';
 				echo'<td data-content="PREPARE">'.$opname.'</td>';
 				echo'<td data-content="INSTALL">'.$sts_sname.'</td>';

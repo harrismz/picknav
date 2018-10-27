@@ -454,8 +454,7 @@
 						snik : nik,
 						jobno : jobno,
 						feederno : rows,
-						scanpartno : sprtno2.val(),
-						model : model
+						scanpartno : sprtno2.val()
 					},
 					function(result) {
 						$('#tbl_scanpartno').html(result).show();
