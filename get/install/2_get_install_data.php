@@ -49,7 +49,7 @@ else{
 		or jobline containing 'JAR')";
 }
 	
-	$sql 		= "select distinct c.jobno,a.jobdate,a.jobtime,a.jobline,a.jobmodelname,b.pwb_name,a.jobpwbno,b.process,
+	echo $sql 		= "select distinct c.jobno,a.jobdate,a.jobtime,a.jobline,a.jobmodelname,b.pwb_name,a.jobpwbno,b.process,
                     a.jobstartserial,a.joblotsize, a.jobfile, c.picname, a.op_name, a.sts_opstart, a.sts_install, sts_ins_sname, sts_ins_ename
                      from jobheaderinfo a
                       left join jobmodel b on a.jobno=b.jobno

@@ -471,6 +471,7 @@
 							$.post('get/install/2_get_smartInstallDesk.php', {
 								nik : nik,
 								jobno : jobno,
+								model : model,
 								feederno : rows
 							},
 							function(result) {

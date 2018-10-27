@@ -1,6 +1,6 @@
 <?php
 	date_default_timezone_set('Asia/Jakarta');
-	include "../adodb/con_part_im.php";
+	include "../adodb/con_picknav.php";
 	include "../adodb/con_smtprosLED.php";
 	include "../adodb/con_criticalpart.php";
 	
@@ -19,11 +19,12 @@
 	//	call post
 		$jdate2      = isset($_REQUEST['jdate']) ? $_REQUEST['jdate'] : '';
 		$jobno2      = isset($_REQUEST['jobno']) ? $_REQUEST['jobno'] : '';
+		$model	     = isset($_POST['model']) ? $_POST['model'] : '';
 		$partnumber2 = isset($_REQUEST['partnumber']) ? $_REQUEST['partnumber'] : '';
 		$partnumber1 = substr($partnumber2, 0, 15);
-		$arr = explode("(", $partnumber1, 2);
-		$partnumber = $arr[0];
-		$firmno = '('.$arr[1];
+		$arr = explode("(", @$partnumber1, 2);
+		$partnumber = @$arr[0];
+		$firmno = '('.@$arr[1];
 		$jdate = trim($jdate2);
 		$jobno = trim($jobno2);
 	
@@ -59,17 +60,17 @@
 			$rs2->Close();
 		
 		//	check LED
-			$sql_checkLED 	= "select count(partno) from [SMTPROS].[dbo].[tblLEDRankPart] where LTRIM(RTRIM(partno)) = '{$get_partnumber}'";
+			$sql_checkLED 	= "select count(partno) from [SMTPROS].[dbo].[tblLEDRankPart] where LTRIM(RTRIM(partno)) = '{$partnumber1}'";
 			$rs_LED			= $db_smtpros->Execute($sql_checkLED);
-			$exist_LED		= $rs_LED->RecordCount();
+			$exist_LED		= $rs_LED->fields['0'];
 			$rs_LED->Close();
 			
-			$sql_checkLEDScan 	= "select count(barcode) from [SMTPROS].[dbo].[tblLEDRankScan] where LTRIM(RTRIM(barcode)) = '{$get_partnumber3}'";
+			$sql_checkLEDScan 	= "select count(barcode) from [SMTPROS].[dbo].[tblLEDRankScan] where LTRIM(RTRIM(barcode)) = '{$partnumber2}'";
 			$rs_LEDScan			= $db_smtpros->Execute($sql_checkLEDScan);
-			$exist_LEDScan		= $rs_LEDScan->RecordCount();
+			$exist_LEDScan		= $rs_LEDScan->fields['0'];
 			$rs_LEDScan->Close();
 		
-		if(($exist_LED == 0 and $exist_LEDScan == 0){
+		if($exist_LED == 0 and $exist_LEDScan == 0){
 			if($exist2 != 0){
 				$pos = "";
 				if (empty($pos2)){
@@ -82,7 +83,7 @@
 				//CK73HBB1E103K 9 7000195842410X
 				//RK73HB1J103J  910000195842410X
 				//RK73HB1J103J  9
-				$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+				echo $sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
 								install_date = '{$date}', install_time = '{$time}'
 								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
 								and partnumber = '{$partnumber}' and ($pos);";
@@ -241,7 +242,7 @@
 				//CK73HBB1E103K 9 7000195842410X
 				//RK73HB1J103J  910000195842410X
 				//RK73HB1J103J  9
-				$sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
+				echo $sql_upd_ins2= "UPDATE jobdetail SET install = 'OK', install_nik = '{$picknav_nik}', install_name = '{$picknav_pic}',
 								install_date = '{$date}', install_time = '{$time}'
 								where jobdate = '{$jdate}' and jobno = '{$jobno}' and zfeeder = '{$zfeeder11}'
 								and partnumber = '{$partnumber}' and ($pos);";
@@ -383,6 +384,11 @@
 					}
 				}
 			}
+			
+			$sql_insLED = "INSERT INTO LEDRANKRECORDS (jobno, zfeeder, partno, model, led_nik, led_date, led_time)
+						values ('{$jobno}','{$zfeeder}','{$partnumber}','{$model}','{$picknav_nik}','{$date}','{$time}')";
+			$rs_insLED = $db->Execute($sql_insLED);
+			$rs_insLED->Close();
 		}
 			
 	}
@@ -413,4 +419,5 @@
 
 $db->Close();
 $db=null;
+
 ?>

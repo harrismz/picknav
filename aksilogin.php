@@ -1,7 +1,7 @@
 <?php
     session_start();
 	date_default_timezone_set('Asia/Jakarta');
-	include '../adodb/con_part_im.php';
+	include '../adodb/con_picknav.php';
 
     $action = isset($_GET['action']) ? $_GET['action'] : '';
     $user   = isset($_POST['picknav_username']) ? $_POST['picknav_username'] : '';
@@ -21,7 +21,7 @@
 			$sql = "select pic, levelno, disabled, nik from usertable
 					   where userid = '{$user}' and passwid = '{$passwd}'";
 			$rs = $db->Execute($sql);
-			$rs->Close();
+			
 			
             if(!$rs->EOF){
 				
@@ -37,7 +37,6 @@
 				$sql = "insert into PICLOGIN (NIK, NAME, AKSESDATE, AKSESTIME, STATUS, AKSES) 
 						values('{$picnik}','{$picname}','{$date}','{$time}','LOGIN','{$piclevel}')";
 				$rs = $db->Execute($sql);
-				$rs->Close();
 				
 				if($_SESSION['picknav_levelno'] == 2 && $_SESSION['picknav_disabled'] == 0){
 				   header('location:dashboard.php?smt=home');
@@ -52,7 +51,6 @@
             else{
                header('location:index.php?warning=wrong');
             }
-            $rs->Close();
         }
     }
     elseif( $action == 'logout' ){
@@ -63,7 +61,6 @@
 		$sql = "insert into PICLOGIN (NIK, NAME, AKSESDATE, AKSESTIME, STATUS, AKSES) 
 				values('{$picnik}','{$picname}','{$date}','{$time}','LOGOUT','{$piclevel}')";
 		$rs = $db->Execute($sql);
-		$rs->Close();
 		
         unset($_SESSION['picknav_pic']);
         unset($_SESSION['picknav_levelno']);
@@ -71,4 +68,6 @@
         unset($_SESSION['picknav_nik']);
         header('location:index.php');
     }
+	
+$rs->Close();
 ?>

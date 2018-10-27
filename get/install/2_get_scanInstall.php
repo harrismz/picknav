@@ -70,15 +70,17 @@ else{
 	
 	$sql_checkLED 	= "select count(partno) from [SMTPROS].[dbo].[tblLEDRankPart] where LTRIM(RTRIM(partno)) = '{$get_partnumber}'";
 	$rs_LED			= $db_smtpros->Execute($sql_checkLED);
-	$exist_LED		= $rs_LED->RecordCount();
+	$exist_LED		= $rs_LED->fields['0'];
 	$rs_LED->Close();
 	
 	$sql_checkLEDScan 	= "select count(barcode) from [SMTPROS].[dbo].[tblLEDRankScan] where LTRIM(RTRIM(barcode)) = '{$get_partnumber3}'";
 	$rs_LEDScan			= $db_smtpros->Execute($sql_checkLEDScan);
-	$exist_LEDScan		= $rs_LEDScan->RecordCount();
+	$exist_LEDScan		= $rs_LEDScan->fields['0'];
 	$rs_LEDScan->Close();
 	
 	if($exist_LED == 0 and $exist_LEDScan == 0){
+		// echo 'BUKAN LED RANK';
+		
 		$sql 	= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
 						loose_reel, loose_reel_rl, loose_reel_qty, loose_reel_qty_blc,
 						full_reel, full_reel_rl, full_reel_qty, full_reel_qty_blc, install, ket, zfd_name, zfd_no, zfd_tray, zfd
@@ -213,16 +215,19 @@ else{
 		}
 		echo'</tbody>';
 		echo'</table>';
+
 	}
 	elseif($exist_LED >= 1 and $exist_LEDScan == 0){
+		// echo 'LED BELUM SCAN';
 		?>
         <h4 class="warning" align="center" style="color: red; font-size: 50px;">LED NG</h4>
 		<audio controls autoplay hidden="hidden">
 		<source src ="asset/sound/LED_NG.mp3" type="audio/mp3"></audio>
-						
-    <?php
+		<?php
 	}
 	elseif($exist_LED >= 1 and $exist_LEDScan >= 1){
+		//echo 'LED RANK';
+		
 		$sql 	= "select first 1 skip 0 zfeeder, pol, pos, pos1, w_fs, p_sp, addrs, partnumber, point, demand,
 						loose_reel, loose_reel_rl, loose_reel_qty, loose_reel_qty_blc,
 						full_reel, full_reel_rl, full_reel_qty, full_reel_qty_blc, install, ket, zfd_name, zfd_no, zfd_tray, zfd
@@ -361,7 +366,7 @@ else{
 	
 }
 
-$rs->Close();
 $db->Close();
-$db=null;
+$db_smtpros->Close();
+$conn->Close();
 ?>
